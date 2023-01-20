@@ -26,11 +26,11 @@ h2 {
   line-height: 24px;
   padding-bottom: 30px;
   text-align: center;
-  width: 70%;
+  <!-- width: 70%; -->
   font-family: Georgia;
 }
 
-.caption {
+  figcaption {
   color: aliceblue;
   line-height: 1.3em;
   text-align: left;
@@ -48,7 +48,7 @@ h2 {
   padding-left: 10px;
   text-transform: uppercase;
 }
-<!--
+
 .caption {
   display: block;
   font-family: 'Playfair Display', serif;
@@ -63,22 +63,24 @@ h2 {
   background-color: white;
   color: black;
 }
--->
+
 .content {
   padding: 40px;
 }
 
+<!--
 .image {
   background-image: url('https://content.codecademy.com/courses/freelance-1/unit-2/soccer.jpeg');
   background-size: cover;
   background-position: center;
   height: 300px;
-}
+} -->
 
+<!--
 .writer-img {
   -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
   -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
   box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
   float: left;
   width: 50px;
-}
+} -->
