@@ -29,14 +29,17 @@ h2 {
   <!-- width: 70%; -->
   font-family: Georgia;
 }
+figure{
+  text-align: center;
+}
 
   figcaption {
   color: aliceblue;
   line-height: 1.3em;
-  text-align: left;
+  text-align: center;
   width: 100%;
   font-family: Helvetica;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
