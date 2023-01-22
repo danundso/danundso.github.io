@@ -11,7 +11,7 @@ body {
 h1 {
   color: #FFF;
   font-size: 60px;
-  padding-top: 100px;
+  padding-top: 40px;
   width: 100%;
   font-family: Georgia;
   text-align: center;
@@ -83,6 +83,7 @@ figure{
   padding: 18px 20px;
   text-decoration: none;
   font-size: 21px;
+  font-family: Georgia;
 }
 .nav a.active {
   background-color: #04AA6D;
