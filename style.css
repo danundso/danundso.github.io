@@ -74,33 +74,23 @@ figure{
   padding: 40px;
 }
 a{
-    color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 100;
   font-size: 30px;
 }
+.nav a.active {
+  background-color: #FFF;
+  color: rgba(255, 255, 255, 0.5);
+}
  .nav{
+  overflow: hidden
   width: 100%;
   font-family: Georgia;
   background-color: #141E30;
   position: fixed;
   top: 0;
-   
- 
-  
-
-<!--
-.image {
-  background-image: url('https://content.codecademy.com/courses/freelance-1/unit-2/soccer.jpeg');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-} -->
-
-<!--
-.writer-img {
-  -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
-  -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
-  box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
   float: left;
-  width: 50px;
-} -->
+  padding: 14px 16px;
+
+
