@@ -75,11 +75,10 @@ figure{
 }
 
 .nav {
-  background-color: #141E30;
+  background-color: #0d1421;
   overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
 .nav a {
   float: left;
   color: #f2f2f2;
@@ -89,13 +88,12 @@ figure{
   font-size: 21px;
 }
 
-/* Change the color of links on hover */
 .nav a:hover {
   background-color: #ddd;
   color: black;
 }
 
-.nav a.active {
+.nav a:active {
   background-color: #04AA6D;
   color: white;
 }
