@@ -28,17 +28,7 @@ h2 {
   <!-- width: 70%; -->
   font-family: Georgia;
 }
-.map1{
-  text-align: center;
-  width: 100%;
-  font-family: Helvetica;
-  font-size: 20px;
-  font-weight: bold;
-  
-}
-
-/*
-  figcaption {
+p {
   color: aliceblue;
   line-height: 1.3em;
   text-align: center;
@@ -47,7 +37,18 @@ h2 {
   font-size: 20px;
   font-weight: bold;
 }
-*/
+.map1{
+  text-align: center;
+  width: 100%;
+  font-family: Helvetica;
+  font-size: 20px;
+  font-weight: bold;
+  max-height: 750px;
+  max-width: 1175px;
+  
+}
+
+
 .byline {
   font-family: Helvetica;
   color: rgba(255, 255, 255, 0.5);
