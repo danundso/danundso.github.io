@@ -79,9 +79,12 @@ figure{
   background-color: #141E30;
   position: fixed;
   top: 0;
-  color: rgba(255, 255, 255, 0.5);
+   
+   a:link, a:visited {
+    color: rgba(255, 255, 255, 0.5);
   font-weight: 100;
   font-size: 30px;
+}
   
 
 <!--
