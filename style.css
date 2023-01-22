@@ -75,7 +75,7 @@ figure{
 }
 
 .nav {
-  background-color: #333;
+  background-color: #141E30;
   overflow: hidden;
 }
 
@@ -84,9 +84,9 @@ figure{
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 18px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 21px;
 }
 
 /* Change the color of links on hover */
