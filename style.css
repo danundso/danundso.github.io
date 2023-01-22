@@ -48,8 +48,11 @@ p {
   margin: 0 auto;
     
 }
-
-
+.myself{
+  height: 300px;
+  width: 400px;
+  text-align: center;
+  
 .byline {
   font-family: Helvetica;
   color: rgba(255, 255, 255, 0.5);
