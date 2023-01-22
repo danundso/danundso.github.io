@@ -80,7 +80,7 @@ figure{
   position: fixed;
   top: 0;
    
-   a:link, a:visited {
+   a{
     color: rgba(255, 255, 255, 0.5);
   font-weight: 100;
   font-size: 30px;
