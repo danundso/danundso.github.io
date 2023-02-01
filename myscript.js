@@ -1,5 +1,11 @@
-function pink(){ document.body.style.background = "pink"; }
-function sky(){ document.body.style.background = "skyblue"; }
+d = document
+
+function pink(){ 
+  title = d.getElementById("title");               
+}
+function change(){
+  title.innerHTML = Danny Anundson";
+
 
 <p onclick="pink()" style="padding:10px;background:pink">Pink</p>
-<p onclick="sky()" style="padding:10px;background:skyblue">Sky</p>
+
