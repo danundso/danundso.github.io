@@ -10,11 +10,11 @@ function change(){
 }
 
 function pic(){
-  if (image.src.match("myself.jpg")) {
-    image.src = "bathroom.jpg";
+  if (me.src.match("myself.jpg")) {
+    me.src = "bathroom.jpg";
   }
    else {
-      image.src = "bathroom.jpg";
+      me.src = "bathroom.jpg";
    }
   
 }
