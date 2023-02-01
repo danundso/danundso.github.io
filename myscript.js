@@ -16,5 +16,8 @@ function pic(){
    else {
       me.src = "bathroom.jpg";
    }
-  
+}
+
+body {
+  background-color: red;
 }
