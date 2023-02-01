@@ -7,5 +7,3 @@ function change(){
   title.innerHTML = "Danny Anundson";
 
 
-<p onclick="pink()" style="padding:10px;background:pink">Pink</p>
-
