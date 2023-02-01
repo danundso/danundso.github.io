@@ -6,4 +6,4 @@ function pink(){
 function change(){
   title.innerHTML = "Danny Anundson";
 
-
+}
