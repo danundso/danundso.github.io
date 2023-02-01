@@ -3,7 +3,7 @@ d = document
 function pink(){ 
   title = d.getElementById("title");  
   me = d.getElementById("me");
-  color = d.getElementById("col1");
+  col = d.getElementById("col1");
 }
 function change(){
   title.innerHTML = "Danny Anundson";
@@ -20,5 +20,5 @@ function pic(){
 }
 
 function color(){
-  color.style.backgroundColor = "Red";
+  col.style.backgroundColor = "Red";
 }
