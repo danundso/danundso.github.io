@@ -10,5 +10,11 @@ function change(){
 }
 
 function pic(){
-  me.innerHTML.src = "bathroom.jpg"
+  if (image.src.match("myself.jpg")) {
+    image.src = "bathroom.jpg";
+  }
+   else {
+      image.src = "bathroom.jpg";
+   }
+  
 }
