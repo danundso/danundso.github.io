@@ -20,7 +20,7 @@ function pic(){
 }
 
 function color(){
-  col.style.backgroundColor = "Red";
+  col.style.background = "Red";
 }
 
 
