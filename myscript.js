@@ -22,3 +22,7 @@ function pic(){
 function color(){
   col.style.backgroundColor = "Red";
 }
+
+document.querySelector("button").addEventListener("click", function() {
+  document.querySelector("body").style.backgroundColor = "rgb(255, 0, 0)";
+});
