@@ -45,6 +45,12 @@ polygon.bindPopup("I am a polygon.");
     .setLatLng([51.513, -0.09])
     .setContent("I am a standalone popup.")
     .openOn(map);
+      
+      function onMapClick(e) {
+          alert("You clicked the map at " + e.latlng);
+      }
+      
+      map.on('click', onMapClick);
             
     </script>
     
