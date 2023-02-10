@@ -128,13 +128,9 @@ p {
 }
 
 .row::after {
-  display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 30px; 
-  /* content: "";
+  content: "";
   clear: both;
-  display: table; */
+  display: table;
 }
 
 #scrollr-base{background: linear-gradient(-45deg, #35577D, #141E30);}
