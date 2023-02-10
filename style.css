@@ -120,7 +120,7 @@ p {
 }
 
 .column {
-  float: left;
+  float: center;
   width: 33.33%;
   padding: 5px;
 }
@@ -129,7 +129,6 @@ p {
   content: "";
   clear: both;
   display: table;
-  text-align: center;
 }
 
 #scrollr-base{background: linear-gradient(-45deg, #35577D, #141E30);}
