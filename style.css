@@ -119,11 +119,15 @@ p {
   color: black;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .column {
   
   float: left;
   width: 33.33%;
-  padding: 1px;
+  padding: 5px;
 }
 
 .row::after {
