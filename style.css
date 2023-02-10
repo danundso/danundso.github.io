@@ -119,6 +119,18 @@ p {
   color: black;
 }
 
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 #scrollr-base{background: linear-gradient(-45deg, #35577D, #141E30);}
 
 /*
