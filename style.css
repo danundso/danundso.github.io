@@ -120,15 +120,21 @@ p {
 }
 
 .column {
+  
   float: left;
   width: 45%;
   padding: 5px;
+  text-align: center; 
 }
 
 .row::after {
-  content: "";
+  display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px; 
+  /* content: "";
   clear: both;
-  display: table;
+  display: table; */
 }
 
 #scrollr-base{background: linear-gradient(-45deg, #35577D, #141E30);}
