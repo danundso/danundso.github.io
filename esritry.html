@@ -96,6 +96,14 @@
         width: 1
     }
  };
+ const popupTemplate = {
+    title: "{Name}",
+    content: "{Description}"
+ }
+ const attributes = {
+    Name: "Graphic",
+    Description: "I am a polygon"
+ }
         
          const polygonGraphic = new Graphic({
     geometry: polygon,
@@ -106,14 +114,7 @@
  });
  graphicsLayer.add(polygonGraphic);
         
-         const popupTemplate = {
-    title: "{Name}",
-    content: "{Description}"
- }
- const attributes = {
-    Name: "Graphic",
-    Description: "I am a polygon"
- }
+
  
  
         
