@@ -69,8 +69,6 @@ L.geoJson(statesData, {style: style}).addTo(map);
       geojson.resetStyle(e.target);
     }
       
-      var geojson;
-      geojson = L.geoJson();
           
       function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
