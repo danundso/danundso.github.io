@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>US Cities Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-+sjOaB0yjEoCvJXz7O+ZFeDmZTzwNoj1ChJxEs1sMaznxn84E/hgws07zy9PGGJPkjLZTtLRiVKjKQZZh2V7CQ==" crossorigin=""/>
+  </head>
+  <body>
+    <div id="map" style="height: 100vh"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-Ev/EkLG7Kj/0mtCfcAYtKFmf1tXj1Oxs21xrvxWk8FvdpdCz5Pbue5K5z8Wd9fSvZnLPBoZC1jn4/Pnz4iLqg==" crossorigin=""></script>
+    <script>
+      var map = L.map('map').setView([37.8, -96], 4);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+      }).addTo(map);
+
+      // Load the US cities data
+      fetch('https://raw.githubusercontent.com/jdamiani27/Data-Visualization-and-D3/master/lesson4/cities.csv')
+        .then(function (response) {
+          return response.text();
+        })
+        .then(function (csv) {
+          var data = d3.csvParse(csv);
+
+          // Add markers for each city
+          for (var i = 0; i < data.length; i++) {
+            var marker = L.marker([data[i].lat, data[i].lng]).addTo(map);
+            marker.bindPopup(data[i].city);
+          }
+        });
+    </script>
+  </body>
+</html>
