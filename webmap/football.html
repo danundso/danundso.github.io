@@ -27,7 +27,7 @@
     
     L.geoJSON(teams).addTo(map);
       
-    onEachFeature: function (feature, layer) {
+    function onEachFeature(feature, layer) {
     layer.bindPopup("Team: " + feature.properties.Team);
   }}).addTo(map);
       
