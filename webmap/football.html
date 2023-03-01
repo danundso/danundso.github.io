@@ -28,8 +28,14 @@
     L.geoJSON(teams).addTo(map);
       
     function onEachFeature(feature, layer) {
-    layer.bindPopup("Team: " + feature.properties.Team);
-  }).addTo(map);
+       if (feature.properties && feature.properties.Team) {
+            layer.bindPopup("Team: " + feature.properties.Team);
+    }
+}
+        
+        
+//    layer.bindPopup("Team: " + feature.properties.Team);
+//  }).addTo(map);
       
        var Logo = L.icon({
     iconUrl: 'italylogos/juventus.png',
