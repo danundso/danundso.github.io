@@ -27,7 +27,9 @@
     
     L.geoJSON(teams).addTo(map);
       
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    onEachFeature: function (feature, layer) {
+    layer.bindPopup("Team: " + feature.properties.Team);
+  }}).addTo(map);
       
        var Logo = L.icon({
     iconUrl: 'italylogos/juventus.png',
