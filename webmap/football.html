@@ -28,8 +28,9 @@
   //   L.geoJSON(teams).addTo(map);
       
     function onEachFeature(feature, layer) {
-       if (feature.properties && feature.properties.Team) {
+       if (feature.properties && feature.properties.Team && feature.properties.Country) {
             layer.bindPopup("Team: " + feature.properties.Team);
+            layer.bindPopup("Country: " + feature.properties.Country);
     }
 }
       L.geoJSON(teams, {
