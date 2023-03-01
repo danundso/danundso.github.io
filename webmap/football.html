@@ -25,14 +25,16 @@
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     
-    L.geoJSON(teams).addTo(map);
+  //   L.geoJSON(teams).addTo(map);
       
     function onEachFeature(feature, layer) {
        if (feature.properties && feature.properties.Team) {
             layer.bindPopup("Team: " + feature.properties.Team);
     }
 }
-        
+      L.geoJSON(teams, {
+    onEachFeature: onEachFeature
+}).addTo(map);
         
 //    layer.bindPopup("Team: " + feature.properties.Team);
 //  }).addTo(map);
