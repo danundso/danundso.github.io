@@ -49,7 +49,9 @@ L.geoJSON(teams, {
                 iconAnchor: [15, 15], // set the anchor point of the icon
             })
         };
-        return L.marker(latlng, markerOptions);
+        var L.marker(latlng, markerOptions);
+        marker.bindPopup("Team: " + feature.properties.Team);
+        return marker;
     }
 }).addTo(map);
      
