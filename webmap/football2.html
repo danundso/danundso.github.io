@@ -42,9 +42,10 @@ var geojsonFeature = {
       
 L.geoJSON(teams, {
     pointToLayer: function (feature, latlng) {
+        var iconUrl = feature.properties.icon;
         var markerOptions = {
             icon: L.icon({
-                iconUrl: feature.properties.icon,
+                iconUrl: iconUrl,
                 iconSize: [20], // set the size of the icon
                 iconAnchor: [10, 10], // set the anchor point of the icon
             })
