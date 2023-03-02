@@ -30,11 +30,11 @@
       geojsonLayer = L.geoJSON(teams, {
     style: function(feature) {
         return {
-        	color: "green"
+        	iconUrl: "ball.png"
         };
     },
     pointToLayer: function(feature, latlng) {
-        return new L.CircleMarker(latlng, {
+        return new L.marker(latlng, {
         	radius: 10, 
         	fillOpacity: 0.85
         });
