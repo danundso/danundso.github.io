@@ -27,14 +27,11 @@
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     
-  //   L.geoJSON(teams).addTo(map);
       
       var Logo = L.icon({
           iconUrl: 'ball.png',
           iconSize: [25],});
           
-    var markers = L.marker([teams.properties.coordinates], {icon: Logo})
-    
     
     function onEachFeature(feature, layer) {
        if (feature.properties && feature.properties.Team && feature.properties.Country) {
@@ -42,22 +39,20 @@
                             "Country: " + feature.properties.Country);
     }     
 }
-      L.geoJSON(markers, {
+      L.geoJSON(teams, {
     onEachFeature: onEachFeature
 }).addTo(map);
         
-//    layer.bindPopup("Team: " + feature.properties.Team);
-//  }).addTo(map);
+
       
-      var Logo1 = L.icon({
-    iconUrl: 'englandlogos/arsenal.png',
+      var Logo = L.icon({
+    iconUrl: 'englandlogos/manu.png',
            
     iconSize:     [25], // size of the icon
-   // iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-   // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
       });
       
-      L.marker([51.5, -0.09], {icon: Logo1}).addTo(map);
+      L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
     
   </script>
   </body>
