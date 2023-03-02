@@ -24,6 +24,7 @@
     
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
+    minZoom: 3,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     
@@ -86,7 +87,7 @@ var myLayer = L.geoJSON(teams, {
       var Logo = L.icon({
     iconUrl: 'englandlogos/manu.png',
            
-    iconSize:     [25], // size of the icon
+    iconSize: [25], // size of the icon
 
       });
       
