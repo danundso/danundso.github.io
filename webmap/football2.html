@@ -40,7 +40,7 @@ var geojsonFeature = {
 
       
       
-L.geoJSON(teams, {onEachFeature: onEachFeature}, {
+L.geoJSON(teams, {
     pointToLayer: function (feature, latlng) {
         var markerOptions = {
             icon: L.icon({
