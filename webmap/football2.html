@@ -38,8 +38,8 @@ var geojsonFeature = {
     }
 };
 
-var myLayer = L.geoJSON(teams, {
-  onEachFeature: function(feature, layer) {
+var myLayer = L.geoJSON(myGeoJSON, {
+  pointToLayer: function(feature, latlng) {
     var iconUrl = feature.properties.icon;
     var icon = L.icon({
       iconUrl: iconUrl,
@@ -47,15 +47,14 @@ var myLayer = L.geoJSON(teams, {
       iconAnchor: [19, 38], // Set the position of the icon's anchor point relative to its top-left corner
       popupAnchor: [0, -30] // Set the position of the popup relative to the icon's anchor point
     });
-    var marker = L.marker(layer.getLatLng(), {icon: icon});
-    marker.addTo(map);
+    return L.marker(latlng, {icon: icon});
   }
-});
+}).addTo(map);
       
       
 // L.geoJSON(teams, {
 //    pointToLayer: function (feature, latlng) {
-//        var iconUrl = feature.properties.icon;
+//        var iconUrl = 'englandlogos/manu.png';
 //        var markerOptions = {
 //            icon: L.icon({
 //                iconUrl: iconUrl,
