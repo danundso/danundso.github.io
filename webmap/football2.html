@@ -27,27 +27,22 @@
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     
-      geojsonLayer = L.geoJSON(teams, {
+geojsonLayer = L.geoJSON(teams, {
     style: function(feature) {
         return {
-        	"icon": "ball.png"
+        	color: "green"
         };
     },
     pointToLayer: function(feature, latlng) {
-        var markerOptions = {
-            icon: L.icon({
-             iconUrl: feature.properties['icon'],
-        	iconSize: [30], 
+        return new L.CircleMarker(latlng, {
+        	radius: 10, 
         	fillOpacity: 0.85
-        })
+        });
     },
-           
-        
-    function onEachFeature(feature, layer) {
+    onEachFeature: function (feature, layer) {
         layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
                        "Country: " + feature.properties.Country);
     }
-        return L.marker(latlng, markerOptions);
 });
 
 map.addLayer(geojsonLayer);
