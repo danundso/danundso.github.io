@@ -38,24 +38,36 @@ var geojsonFeature = {
     }
 };
 
-      
-      
-L.geoJSON(teams, {
-    pointToLayer: function (feature, latlng) {
-        var iconUrl = feature.properties.icon;
-        var markerOptions = {
-            icon: L.icon({
-                iconUrl: iconUrl,
-                iconSize: [20], // set the size of the icon
-                iconAnchor: [10, 10], // set the anchor point of the icon
-            })
-        };
-        var marker = L.marker(latlng, markerOptions);
-        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-                         "Country: " + feature.properties.Country);
-        return marker;
-    }
+      var myLayer = L.geoJSON(teams, {
+  pointToLayer: function(feature, latlng) {
+    var iconUrl = feature.properties.icon;
+    var icon = L.icon({
+      iconUrl: iconUrl,
+      iconSize: [38, 38], // Set the size of the icon
+      iconAnchor: [19, 38], // Set the position of the icon's anchor point relative to its top-left corner
+      popupAnchor: [0, -30] // Set the position of the popup relative to the icon's anchor point
+    });
+    return L.marker(latlng, {icon: icon});
+  }
 }).addTo(map);
+      
+      
+// L.geoJSON(teams, {
+//    pointToLayer: function (feature, latlng) {
+//        var iconUrl = feature.properties.icon;
+//        var markerOptions = {
+//            icon: L.icon({
+//                iconUrl: iconUrl,
+//                iconSize: [20], // set the size of the icon
+//                iconAnchor: [10, 10], // set the anchor point of the icon
+//            })
+//        };
+//        var marker = L.marker(latlng, markerOptions);
+//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                         "Country: " + feature.properties.Country);
+//        return marker;
+//    }
+// }).addTo(map);
      
 //          function onEachFeature(feature, layer) {
 //    if (feature.properties && feature.properties.Team && feature.properties.Country) {
