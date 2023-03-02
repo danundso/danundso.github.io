@@ -35,6 +35,10 @@
                             "Country: " + feature.properties.Country);
             
     }
+         var Logo = L.icon({
+    iconUrl: 'ball.png',
+    iconSize:     [25],});
+        
 }
       L.geoJSON(teams, {
     onEachFeature: onEachFeature
