@@ -29,18 +29,19 @@
     
   //   L.geoJSON(teams).addTo(map);
       
+      var Logo = L.icon({
+          iconUrl: 'ball.png',
+          iconSize: [25],});
+          
+    
     function onEachFeature(feature, layer) {
        if (feature.properties && feature.properties.Team && feature.properties.Country) {
             layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
                             "Country: " + feature.properties.Country);
             
-    }
-         var Logo = L.icon({
-    iconUrl: 'ball.png',
-    iconSize:     [25],});
-        
+    }     
 }
-      L.geoJSON(teams, {
+      L.geoJSON(teams, Logo, {
     onEachFeature: onEachFeature
 }).addTo(map);
         
