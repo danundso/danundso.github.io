@@ -33,7 +33,7 @@
           iconUrl: 'ball.png',
           iconSize: [25],});
           
-    var marker = L.marker([teams], {icon: Logo}).addTo(map);
+    var marker = L.marker([feature.properties.coordinates], {icon: Logo}).addTo(map);
     
     function onEachFeature(feature, layer) {
        if (feature.properties && feature.properties.Team && feature.properties.Country) {
