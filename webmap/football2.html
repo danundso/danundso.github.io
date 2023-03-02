@@ -33,7 +33,8 @@
           iconUrl: 'ball.png',
           iconSize: [25],});
           
-    var marker = L.marker([feature.properties.coordinates], {icon: Logo}).addTo(map);
+    var markers = L.marker([teams], {icon: Logo})
+    
     
     function onEachFeature(feature, layer) {
        if (feature.properties && feature.properties.Team && feature.properties.Country) {
@@ -41,7 +42,7 @@
                             "Country: " + feature.properties.Country);
     }     
 }
-      L.geoJSON({
+      L.geoJSON(markers, {
     onEachFeature: onEachFeature
 }).addTo(map);
         
