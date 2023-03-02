@@ -38,9 +38,9 @@ var geojsonFeature = {
     }
 };
 
-var myLayer = L.geoJSON(myGeoJSON, {
+var myLayer = L.geoJSON(teams, {
   pointToLayer: function(feature, latlng) {
-    var iconUrl = feature.properties.icon;
+    var iconUrl = 'englandlogos/manu.png';
     var icon = L.icon({
       iconUrl: iconUrl,
       iconSize: [38, 38], // Set the size of the icon
