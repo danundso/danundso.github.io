@@ -53,15 +53,15 @@ L.geoJSON(teams, {
      
           
     
-//    function onEachFeature(feature, layer) {
-//     if (feature.properties && feature.properties.Team && feature.properties.Country) {
-//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                            "Country: " + feature.properties.Country);
-//       }}
+    function onEachFeature(feature, layer) {
+     if (feature.properties && feature.properties.Team && feature.properties.Country) {
+            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+                            "Country: " + feature.properties.Country);
+       }}
       
-//      L.geoJSON(teams, {
-//    onEachFeature: onEachFeature
-// }).addTo(map);
+      L.geoJSON(teams, {
+    onEachFeature: onEachFeature
+ }).addTo(map);
         
 
       
