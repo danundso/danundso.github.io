@@ -46,8 +46,8 @@ var myLayer = L.geoJSON(teams, {
           iconUrl = "ball.png" }
     var icon = L.icon({
       iconUrl: iconUrl,
-      iconSize: [38, 38], // Set the size of the icon
-      iconAnchor: [19, 38], // Set the position of the icon's anchor point relative to its top-left corner
+      iconSize: [28], // Set the size of the icon
+      iconAnchor: [14, 14], // Set the position of the icon's anchor point relative to its top-left corner
       popupAnchor: [0, -30] // Set the position of the popup relative to the icon's anchor point
     });
     return L.marker(latlng, {icon: icon});
