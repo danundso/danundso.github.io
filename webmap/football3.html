@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Teams</title>
+    <link rel="icon" href="ball.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <script src="AllFiveLeaguesTry0301.js"
+     crossorigin=""></script>
+     
+     <style>
+      #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
+      </style>
+</head>
+<body>
+  <div id = "map"></div>
+  <script>
+    var map = L.map('map').setView([45, 3], 5);
+    
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    minZoom: 3,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+    
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "icon": "ball.png"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [0, 0]
+    }
+};
+
+var myLayer = L.geoJSON(teams, {
+  pointToLayer: function(feature, latlng) {
+    var iconUrl = 'englandlogos/manu.png';
+    var icon = L.icon({
+      iconUrl: iconUrl,
+      iconSize: [38, 38], // Set the size of the icon
+      iconAnchor: [19, 38], // Set the position of the icon's anchor point relative to its top-left corner
+      popupAnchor: [0, -30] // Set the position of the popup relative to the icon's anchor point
+    });
+    return L.marker(latlng, {icon: icon});
+  }
+}).addTo(map);
+      
+      
+// L.geoJSON(teams, {
+//    pointToLayer: function (feature, latlng) {
+//        var iconUrl = 'englandlogos/manu.png';
+//        var markerOptions = {
+//            icon: L.icon({
+//                iconUrl: iconUrl,
+//                iconSize: [20], // set the size of the icon
+//                iconAnchor: [10, 10], // set the anchor point of the icon
+//            })
+//        };
+//        var marker = L.marker(latlng, markerOptions);
+//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                         "Country: " + feature.properties.Country);
+//        return marker;
+//    }
+// }).addTo(map);
+     
+//          function onEachFeature(feature, layer) {
+//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
+//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                            "Country: " + feature.properties.Country);
+//       }}
+    
+    
+      
+ //     L.geoJSON(teams, {
+ //   onEachFeature: onEachFeature
+  // }).addTo(map);
+        
+
+      
+      var Logo = L.icon({
+    iconUrl: 'englandlogos/manu.png',
+           
+    iconSize: [25], // size of the icon
+
+      });
+      
+      L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+    
+  </script>
+  </body>
+</html>
