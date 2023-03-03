@@ -49,7 +49,8 @@ var myLayer = L.geoJSON(teams, {
       iconSize: [28], // Set the size of the icon
       iconAnchor: [14, 14], // Set the position of the icon's anchor point relative to its top-left corner
     });
-    var marker = L.marker(latlng, { icon: icon }).bindPopup(feature.properties.Team);
+    var marker = L.marker(latlng, { icon: icon }).bindPopup("Team: " + feature.properties.Team + "<br>" + 
+                                                            "Country: " + feature.properties.Country);
     return marker;
   }
 }).addTo(map);
