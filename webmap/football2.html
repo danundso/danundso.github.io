@@ -42,7 +42,7 @@ var geojsonFeature = {
 var myLayer = L.geoJSON(teams, {
   pointToLayer: function(feature, latlng) {
     var iconUrl = feature.properties.icon;
-      if ! (iconUrl) {
+      if  (!iconUrl) {
           iconUrl = "ball.png" }
     var icon = L.icon({
       iconUrl: iconUrl,
