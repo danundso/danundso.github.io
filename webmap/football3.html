@@ -57,7 +57,7 @@ var spainLayer = L.geoJSON(teams, {
 
     return marker;
   }
-});
+}).addTo(map);
 
 var italyLayer = L.geoJSON(teams, {
   filter: function(feature) {
@@ -77,7 +77,7 @@ var italyLayer = L.geoJSON(teams, {
 
     return marker;
   }
-});
+}).addTo(map);
 
 var englandLayer = L.geoJSON(teams, {
   filter: function(feature) {
@@ -97,7 +97,7 @@ var englandLayer = L.geoJSON(teams, {
 
     return marker;
   }
-});
+}).addTo(map);
 
 var franceLayer = L.geoJSON(teams, {
   filter: function(feature) {
@@ -117,7 +117,7 @@ var franceLayer = L.geoJSON(teams, {
 
     return marker;
       }
-    });
+    }).addTo(map);
 
 
 var germanyLayer = L.geoJSON(teams, {
@@ -138,7 +138,7 @@ var germanyLayer = L.geoJSON(teams, {
 
     return marker;
   }
-});
+}).addTo(map);
       
       
 // L.geoJSON(teams, {
