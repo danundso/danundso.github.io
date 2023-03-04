@@ -70,7 +70,7 @@ var italyLayer = L.geoJSON(teams, {
         iconSize: [25],
         iconAnchor: [12, 12]
       })
-    }).addTo(map);
+    });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country);
