@@ -41,14 +41,17 @@ var geojsonFeature = {
 
 var myLayer = L.geoJSON(teams, {
   pointToLayer: function(feature, latlng) {
-    var iconUrl = 'englandlogos/manu.png';
+    var iconUrl = feature.properties.icon;
+      if  (!iconUrl) {
+          iconUrl = "ball.png" }
     var icon = L.icon({
       iconUrl: iconUrl,
-      iconSize: [38, 38], // Set the size of the icon
-      iconAnchor: [19, 38], // Set the position of the icon's anchor point relative to its top-left corner
-      popupAnchor: [0, -30] // Set the position of the popup relative to the icon's anchor point
+      iconSize: [25], // Set the size of the icon
+      iconAnchor: [12, 12], // Set the position of the icon's anchor point relative to its top-left corner
     });
-    return L.marker(latlng, {icon: icon});
+    var marker = L.marker(latlng, { icon: icon }).bindPopup("Team: " + feature.properties.Team + "<br>" + 
+                                                            "Country: " + feature.properties.Country);
+    return marker;
   }
 }).addTo(map);
       
@@ -84,15 +87,31 @@ var myLayer = L.geoJSON(teams, {
         
 
       
-      var Logo = L.icon({
-    iconUrl: 'englandlogos/manu.png',
+  //    var Logo = L.icon({
+  //  iconUrl: 'englandlogos/manu.png',
            
-    iconSize: [25], // size of the icon
+  //  iconSize: [25], // size of the icon
 
-      });
+    //  });
       
-      L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
-    
+    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+      
   </script>
+    
+    <style>
+      .custom-popup .leaflet-popup-content-wrapper {
+  background-color: #e6e6fa; /* light purple */
+  font-size: 16px; /* larger font size */
+}
+
+.custom-popup .leaflet-popup-tip {
+  background-color: #e6e6fa; /* light purple */
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 10px 10px 10px 10px; /* increase padding */
+}
+    </style>
+    
   </body>
 </html>
