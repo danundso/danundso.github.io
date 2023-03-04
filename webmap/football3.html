@@ -41,7 +41,7 @@ var geojsonFeature = {
 
 var spainLayer = L.geoJSON(teams, {
   filter: function(feature) {
-    return feature.properties.Country === "Spain";
+    return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
@@ -61,7 +61,7 @@ var spainLayer = L.geoJSON(teams, {
 
 var italyLayer = L.geoJSON(teams, {
   filter: function(feature) {
-    return feature.properties.Country === "Italy";
+    return feature.properties.Country === "Italy ";
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
