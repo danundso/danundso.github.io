@@ -39,21 +39,94 @@ var geojsonFeature = {
     }
 };
 
-var myLayer = L.geoJSON(teams, {
+var spainLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Spain";
+  },
   pointToLayer: function(feature, latlng) {
-    var iconUrl = feature.properties.icon;
-      if  (!iconUrl) {
-          iconUrl = "ball.png" }
-    var icon = L.icon({
-      iconUrl: iconUrl,
-      iconSize: [25], // Set the size of the icon
-      iconAnchor: [12, 12], // Set the position of the icon's anchor point relative to its top-left corner
+    // create marker and bind popup
+  }
+});
+
+var italyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Italy";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+  }
+});
+
+var englandLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "England";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
     });
-    var marker = L.marker(latlng, { icon: icon }).bindPopup("Team: " + feature.properties.Team + "<br>" + 
-                                                            "Country: " + feature.properties.Country);
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country);
+
     return marker;
   }
-}).addTo(map);
+});
+
+var franceLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "France";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country);
+
+    return marker;
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country);
+
+    return marker;
+  }
+});
+
+var germanyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Germany";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country);
+
+    return marker;
+  }
+});
       
       
 // L.geoJSON(teams, {
