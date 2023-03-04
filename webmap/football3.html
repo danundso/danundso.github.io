@@ -145,42 +145,23 @@ var germanyLayer = L.geoJSON(teams, {
   }
 }).addTo(map);
       
-//  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
+  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
       
-//      var baseLayers = {
-//  "All Teams": group
-// };
+      var baseLayers = {
+ "All Teams": group
+ };
 
-// var overlayLayers = {
- // "Spain": spainLayer,
- // "Italy": italyLayer,
- // "England": englandLayer,
- // "France": franceLayer,
- // "Germany": germanyLayer
-// };
+var overlayLayers = {
+ "Spain": spainLayer,
+ "Italy": italyLayer,
+ "England": englandLayer,
+ "France": franceLayer,
+ "Germany": germanyLayer
+ };
 
-// L.control.layers(baseLayers, overlayLayers).addTo(map);
+ L.control.layers(baseLayers, overlayLayers).addTo(map);
       
-      var countriesControl = L.control({
-  position: "topright"
-});
 
-countriesControl.onAdd = function(map) {
-  var div = L.DomUtil.create("div", "countries-control");
-
-  div.innerHTML = '<h4>Countries</h4>' +
-    '<label><input type="checkbox" class="country-checkbox" value="Spain" checked>Spain</label><br>' +
-    '<label><input type="checkbox" class="country-checkbox" value="Italy" checked>Italy</label><br>' +
-    '<label><input type="checkbox" class="country-checkbox" value="England" checked>England</label><br>' +
-    '<label><input type="checkbox" class="country-checkbox" value="France" checked>France</label><br>' +
-    '<label><input type="checkbox" class="country-checkbox" value="Germany" checked>Germany</label>';
-
-  L.DomEvent.disableClickPropagation(div);
-
-  return div;
-};
-
-countriesControl.addTo(map);
       
       
 // L.geoJSON(teams, {
