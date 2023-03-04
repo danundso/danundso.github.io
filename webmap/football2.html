@@ -58,52 +58,13 @@ var myLayer = L.geoJSON(teams, {
 }).addTo(map);
       
       
-// L.geoJSON(teams, {
-//    pointToLayer: function (feature, latlng) {
-//        var iconUrl = 'englandlogos/manu.png';
-//        var markerOptions = {
-//            icon: L.icon({
-//                iconUrl: iconUrl,
-//                iconSize: [20], // set the size of the icon
-//                iconAnchor: [10, 10], // set the anchor point of the icon
-//            })
-//        };
-//        var marker = L.marker(latlng, markerOptions);
-//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                         "Country: " + feature.properties.Country);
-//        return marker;
-//    }
-// }).addTo(map);
-     
-//          function onEachFeature(feature, layer) {
-//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
-//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                            "Country: " + feature.properties.Country);
-//       }}
-    
-    
-      
- //     L.geoJSON(teams, {
- //   onEachFeature: onEachFeature
-  // }).addTo(map);
-        
-
-      
-  //    var Logo = L.icon({
-  //  iconUrl: 'englandlogos/manu.png',
-           
-  //  iconSize: [25], // size of the icon
-
-    //  });
-      
-    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
-      
   </script>
     
     <style>
       .custom-popup .leaflet-popup-content-wrapper {
   background-color: #e6e6fa; /* light purple */
-  font-size: 16px; /* larger font size */
+  font-size: 12px; /* larger font size */
+   font-family: "Lucida Sans", sans-serif;
 }
 
 .custom-popup .leaflet-popup-tip {
@@ -111,7 +72,7 @@ var myLayer = L.geoJSON(teams, {
 }
 
 .custom-popup .leaflet-popup-content {
-  margin: 10px 10px 10px 10px; /* increase padding */
+  margin: 7px 7px 7px 7px; /* increase padding */
 }
     </style>
     
