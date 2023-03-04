@@ -140,6 +140,22 @@ var germanyLayer = L.geoJSON(teams, {
   }
 }).addTo(map);
       
+  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
+      
+      var baseLayers = {
+  "All Teams": group
+};
+
+var overlayLayers = {
+  "Spain": spainLayer,
+  "Italy": italyLayer,
+  "England": englandLayer,
+  "France": franceLayer,
+  "Germany": germanyLayer
+};
+
+L.control.layers(baseLayers, overlayLayers).addTo(map);
+      
       
 // L.geoJSON(teams, {
 //    pointToLayer: function (feature, latlng) {
