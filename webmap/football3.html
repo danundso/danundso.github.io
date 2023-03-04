@@ -147,9 +147,9 @@ var germanyLayer = L.geoJSON(teams, {
       
   var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
       
- //     var baseLayers = {
-//  "All Teams": group
-// };
+      var baseLayers = {
+  "All Teams": group
+ };
 
 var overlayLayers = {
   "Spain": spainLayer,
@@ -218,7 +218,7 @@ L.control.layers(baseLayers, overlayLayers).addTo(map);
   margin: 10px 10px 10px 10px; /* increase padding */
 }
         
-        .leaflet-control-layers {
+   /*  .leaflet-control-layers {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -228,8 +228,8 @@ L.control.layers(baseLayers, overlayLayers).addTo(map);
   padding: 5px;
   font-family: "Lucida Sans", sans-serif;
   font-size: 14px;
-  color: #333;
-}
+  
+} */
     </style>
     
   </body>
