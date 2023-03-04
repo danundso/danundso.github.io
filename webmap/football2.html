@@ -95,7 +95,24 @@ var myLayer = L.geoJSON(teams, {
     //  });
       
     //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
-    
+      
+      
+    <style>
+      .custom-popup .leaflet-popup-content-wrapper {
+  background-color: #e6e6fa; /* light purple */
+  font-size: 16px; /* larger font size */
+}
+
+.custom-popup .leaflet-popup-tip {
+  background-color: #e6e6fa; /* light purple */
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 10px 10px 10px 10px; /* increase padding */
+}
+    </style>
+      
+      
   </script>
   </body>
 </html>
