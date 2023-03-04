@@ -53,7 +53,8 @@ var spainLayer = L.geoJSON(teams, {
     });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                      "Country: " + feature.properties.Country);
+                      "Country: " + feature.properties.Country,
+                                {className: 'custom-popup'});
 
     return marker;
   }
@@ -73,7 +74,8 @@ var italyLayer = L.geoJSON(teams, {
     });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                      "Country: " + feature.properties.Country);
+                      "Country: " + feature.properties.Country,
+                          {className: 'custom-popup'});
 
     return marker;
   }
@@ -93,7 +95,8 @@ var englandLayer = L.geoJSON(teams, {
     });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                      "Country: " + feature.properties.Country);
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
 
     return marker;
   }
@@ -113,7 +116,8 @@ var franceLayer = L.geoJSON(teams, {
     });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                      "Country: " + feature.properties.Country);
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
 
     return marker;
       }
@@ -134,7 +138,8 @@ var germanyLayer = L.geoJSON(teams, {
     });
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                      "Country: " + feature.properties.Country);
+                      "Country: " + feature.properties.Country,
+                        {className: 'custom-popup'});
 
     return marker;
   }
@@ -142,9 +147,9 @@ var germanyLayer = L.geoJSON(teams, {
       
   var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
       
-      var baseLayers = {
-  "All Teams": group
-};
+ //     var baseLayers = {
+//  "All Teams": group
+// };
 
 var overlayLayers = {
   "Spain": spainLayer,
