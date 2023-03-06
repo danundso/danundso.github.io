@@ -24,40 +24,215 @@
     
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
+    minZoom: 3,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     
-  //   L.geoJSON(teams).addTo(map);
-      
-      var Logo = L.icon({
-          iconUrl: 'ball.png',
-          iconSize: [25],});
-          
-    
-    function onEachFeature(feature, layer) {
-       if (feature.properties && feature.properties.Team && feature.properties.Country) {
-            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-                            "Country: " + feature.properties.Country);
-    }     
-}
-      L.geoJSON(teams, {
-    onEachFeature: onEachFeature
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "icon": "ball.png"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [0, 0]
+    }
+};
+
+var spainLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                                {className: 'custom-popup'});
+
+    return marker;
+  }
 }).addTo(map);
-        
-//    layer.bindPopup("Team: " + feature.properties.Team);
-//  }).addTo(map);
+
+var italyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Italy ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                          {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var englandLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "England";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [28],
+        iconAnchor: [14, 14]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var franceLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "France";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+      }
+    }).addTo(map);
+
+
+var germanyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Germany";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                        {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
       
-      var Logo = L.icon({
-    iconUrl: 'englandlogos/manu.png',
-           
-    iconSize:     [25], // size of the icon
-   // iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-   // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-      });
+  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
       
-      L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+      var baseLayers = {
+ "All Teams": group
+ };
+
+var overlayLayers = {
+ "Spain": spainLayer,
+ "Italy": italyLayer,
+ "England": englandLayer,
+ "France": franceLayer,
+ "Germany": germanyLayer
+ };
+
+ L.control.layers(baseLayers, overlayLayers).addTo(map);
+      
+
+      
+      
+// L.geoJSON(teams, {
+//    pointToLayer: function (feature, latlng) {
+//        var iconUrl = 'englandlogos/manu.png';
+//        var markerOptions = {
+//            icon: L.icon({
+//                iconUrl: iconUrl,
+//                iconSize: [20], // set the size of the icon
+//                iconAnchor: [10, 10], // set the anchor point of the icon
+//            })
+//        };
+//        var marker = L.marker(latlng, markerOptions);
+//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                         "Country: " + feature.properties.Country);
+//        return marker;
+//    }
+// }).addTo(map);
+     
+//          function onEachFeature(feature, layer) {
+//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
+//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                            "Country: " + feature.properties.Country);
+//       }}
     
+    
+      
+ //     L.geoJSON(teams, {
+ //   onEachFeature: onEachFeature
+  // }).addTo(map);
+        
+
+      
+  //    var Logo = L.icon({
+  //  iconUrl: 'englandlogos/manu.png',
+           
+  //  iconSize: [25], // size of the icon
+
+    //  });
+      
+    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+      
   </script>
+    
+    <style>
+      .custom-popup .leaflet-popup-content-wrapper {
+  background-color: #e6e6fa; /* light purple */
+  font-size: 16px; /* larger font size */
+}
+
+.custom-popup .leaflet-popup-tip {
+  background-color: #e6e6fa; /* light purple */
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 10px 10px 10px 10px; /* increase padding */
+}
+        
+   /*  .leaflet-control-layers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d8bfd8;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Lucida Sans", sans-serif;
+  font-size: 14px;
+  
+} */
+    </style>
+    
   </body>
 </html>
-    
