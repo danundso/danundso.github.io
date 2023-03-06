@@ -89,7 +89,11 @@ var englandLayer = L.geoJSON(teams, {
     var marker = L.marker(latlng, {
       icon: L.icon({
         iconUrl: feature.properties.icon || "ball.png",
-        iconSize: [28],
+        if (map.getZoom() >= 13) {
+    iconSize = [40];
+  } else {
+    iconSize = [25];
+  },
         iconAnchor: [14, 14]
       })
     });
