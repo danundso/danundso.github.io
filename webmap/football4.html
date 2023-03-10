@@ -29,6 +29,18 @@
 <body>
     <div id="map"></div>
     <div id="slider"></div>
+	
+		    $(function() {
+    // initialize time slider
+    $("#slider").slider({
+        min: 0,
+        max: 100,
+        value: 0,
+        slide: function(event, ui) {
+            // update map based on slider value
+        }
+    });
+});
 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
@@ -180,17 +192,7 @@ var overlayLayers = {
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
 	    
-	    $(function() {
-    // initialize time slider
-    $("#slider").slider({
-        min: 0,
-        max: 100,
-        value: 0,
-        slide: function(event, ui) {
-            // update map based on slider value
-        }
-    });
-});
+
       
 
       
