@@ -164,6 +164,29 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
+	  
+	  var timeLayer = L.timeDimension.layer.wms(wmsLayer, {
+    updateTimeDimension: true,
+    updateTimeDimensionMode: 'replace'
+});
+timeLayer.addTo(map);
+
+	  
+	  var controlOptions = {
+    playerOptions: {
+        transitionTime: 250,
+        loop: true,
+        startOver: true
+    },
+    timeSliderDragUpdate: true,
+    position: 'topright'
+};
+var timeDimensionControl = new L.Control.TimeDimension(controlOptions);
+map.addControl(timeDimensionControl);
+	  
+	  
+	  
+	  
       
       //set up time slider (jQuery-UI)
 	$("#timeslide").slider({
