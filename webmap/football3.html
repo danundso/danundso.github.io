@@ -16,6 +16,7 @@
      <style>
       #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
       </style>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/pepper-grinder/jquery-ui.css"/>
 </head>
 <body>
   <div id = "map"></div>
@@ -160,6 +161,25 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
+      
+      //set up time slider (jQuery-UI)
+	$("#timeslide").slider({
+		min:1830,
+		max:1930,
+		stop: function(event,ui) {
+			document.getElementById("year").value = String(ui.value);
+//			console.log(ui.value);
+			filteryear();
+		}
+	  })
+	  .append($('<p style="left: 0%">1830</label>'))
+	  .append($('<p style="left: 20%">1850</label>'))
+	  .append($('<p style="left: 40%">1870</label>'))
+	  .append($('<p style="left: 60%">1890</label>'))
+	  .append($('<p style="left: 80%">1910</label>'))
+	  .append($('<p style="left: 100%">1930</label>'));
+	
+});
       
 
       
