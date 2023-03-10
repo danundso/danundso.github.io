@@ -179,6 +179,18 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
+	    
+	    $(function() {
+    // initialize time slider
+    $("#slider").slider({
+        min: 0,
+        max: 100,
+        value: 0,
+        slide: function(event, ui) {
+            // update map based on slider value
+        }
+    });
+});
       
 
       
