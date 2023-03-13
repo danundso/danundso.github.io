@@ -7,94 +7,75 @@
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/pepper-grinder/jquery-ui.css"/>
+     
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <script src="AllFiveLeaguesTry0301.js"
+     crossorigin=""></script>
 
-    <style>
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-
-        #slider {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            width: calc(100% - 100px);
-        }
-    </style>
-
+     
+     <style>
+      #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
+      </style>
+    
 </head>
 <body>
-<div id="slider"></div>
-    <div id="map"></div>
+  <div id = "map"></div>
+  <script>
+    var map = L.map('map').setView([45, 3], 5);
     
-	
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    minZoom: 3,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+    
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "icon": "ball.png"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [0, 0]
+    }
+};
 
+var spainLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
 
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-            crossorigin=""></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script src="AllFiveLeaguesTry0301.js"></script>
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                                {className: 'custom-popup'});
 
-    <script>
-        var map = L.map('map').setView([45, 3], 5);
+    return marker;
+  }
+}).addTo(map);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            minZoom: 3,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+var italyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Italy ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
 
-        var geojsonFeature = {
-            "type": "Feature",
-            "properties": {
-                "icon": "ball.png"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [0, 0]
-            }
-        };
-
-        var spainLayer = L.geoJSON(teams, {
-            filter: function (feature) {
-                return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
-            },
-            pointToLayer: function (feature, latlng) {
-                var marker = L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: feature.properties.icon || "ball.png",
-                        iconSize: [25],
-                        iconAnchor: [12, 12]
-                    })
-                });
-
-                marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
-                    "Country: " + feature.properties.Country,
-                    { className: 'custom-popup' });
-
-                return marker;
-            }
-        }).addTo(map);
-
-        var italyLayer = L.geoJSON(teams, {
-            filter: function (feature) {
-                return feature.properties.Country === "Italy ";
-            },
-            pointToLayer: function (feature, latlng) {
-                var marker = L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: feature.properties.icon || "ball.png",
-                        iconSize: [25],
-                        iconAnchor: [12, 12]
-                    })
-                });
-
-               
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
@@ -111,7 +92,7 @@ var englandLayer = L.geoJSON(teams, {
     var marker = L.marker(latlng, {
       icon: L.icon({
         iconUrl: feature.properties.icon || "ball.png",
-        iconSize: [28],
+        iconSize: [25],
         iconAnchor: [14, 14]
       })
     });
@@ -182,20 +163,13 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
-	    
- $(function() {
-    // initialize time slider
-    $("#slider").slider({
-        min: 0,
-        max: 100,
-        value: 0,
-        slide: function(event, ui) {
-            // update map based on slider value
-        }
-    });
-});
-	    
-
+	  
+ 
+	  
+	  
+	  
+     
+	
       
 
       
