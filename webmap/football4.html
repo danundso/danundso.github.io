@@ -13,6 +13,9 @@
      crossorigin=""></script>
     <script src="AllFiveLeaguesTry0301.js"
      crossorigin=""></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="jquery.timeslider.css" />
+	<script src="jquery.timeslider.js"></script>
 
      
      <style>
@@ -22,6 +25,7 @@
 </head>
 <body>
   <div id = "map"></div>
+  <div id="time-slider"></div>
   <script>
     var map = L.map('map').setView([45, 3], 5);
     
@@ -166,7 +170,25 @@ var overlayLayers = {
 	  
  
 	  
+	  $("#time-slider").timeslider({
+    start: new Date("2021-01-01"),
+    end: new Date("2022-01-01"),
+    step: {
+        days: 1
+    },
+    range: {
+        min: new Date("2021-01-01"),
+        max: new Date("2022-01-01")
+    },
+    format: "YYYY-MM-DD",
+    snap: true,
+    realtime: true
+});
 	  
+$("#time-slider").on("slide", function(event, values) {
+    var currentTime = moment(values[0]).format("YYYY-MM-DD");
+    // Update your map based on the current time
+});
 	  
      
 	
