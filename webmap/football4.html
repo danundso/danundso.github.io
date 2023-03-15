@@ -37,7 +37,15 @@
   <div id = "map"></div>
   <div id="slider"></div>
   <script>
-    $( "#slider" ).slider();
+	  
+ $(function() {
+  $("#slider").slider({
+    min: 1,
+    max: 7,
+    step: 1,
+    value: 4
+  });
+});
 	  
     var map = L.map('map').setView([45, 3], 5);
     
