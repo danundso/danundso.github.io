@@ -58,20 +58,25 @@ $("#slider").slider({
   stop: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
-	  
-	alert("Year is " + year)
 
-    // Filter the teams based on the selected year
-   // var filteredTeams = $("path").filter(function() {
-      // Check if the team was in the league during the selected year
-   //   return $(this).attr(year) === "1";
-  //  });
+    // Show/hide the teams based on the selected year
+    $(".team").each(function() {
+      if ($(this).attr(year) === "1") {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  }
+});
 
-    // Hide all teams
- //   $("path").hide();
 
-    // Show the filtered teams
- //   filteredTeams.show();
+
+     Hide all teams
+    $("path").hide();
+
+     Show the filtered teams
+    filteredTeams.show();
   }
 });
 
