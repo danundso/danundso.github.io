@@ -6,20 +6,47 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/pepper-grinder/jquery-ui.css"/>
      
      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
     <script src="AllFiveLeaguesTry0301.js"
      crossorigin=""></script>
+
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <style>#slider { margin: 10px; }  </style>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
      
      <style>
       #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
+	     
+	     .infobox { position: absolute;
+       left:15px; width: 500px; top: 15px;
+       z-index: 20; padding: 5px; border-radius: 5px;
+       background-color: #ffffff; opacity: 0.7;
+       }
+	     
       </style>
+    
 </head>
 <body>
   <div id = "map"></div>
+  <div id="slider"></div>
   <script>
+	  
+ $(function() {
+  $("#slider").slider({
+    min: 1,
+    max: 7,
+    step: 1,
+    value: 4
+  });
+});
+	  
     var map = L.map('map').setView([45, 3], 5);
     
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,31 +66,200 @@ var geojsonFeature = {
     }
 };
 
-var myLayer = L.geoJSON(teams, {
+var spainLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
+  },
   pointToLayer: function(feature, latlng) {
-    var iconUrl = feature.properties.icon;
-      if  (!iconUrl) {
-          iconUrl = "ball.png" }
-    var icon = L.icon({
-      iconUrl: iconUrl,
-      iconSize: [25], // Set the size of the icon
-      iconAnchor: [12, 12], // Set the position of the icon's anchor point relative to its top-left corner
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
     });
-    var marker = L.marker(latlng, { icon: icon }).bindPopup("Team: " + feature.properties.Team + "<br>" + 
-                                                            "Country: " + feature.properties.Country,
-                                                            {className: 'custom-popup'}
-    );
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                                {className: 'custom-popup'});
+
     return marker;
   }
 }).addTo(map);
-         
+
+var italyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Italy ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                          {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var englandLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "England";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [14, 14]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var franceLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "France";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+      }
+    }).addTo(map);
+
+
+var germanyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Germany";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                        {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+      
+  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer]);
+      
+      var baseLayers = {
+ "All Teams": group
+ };
+
+var overlayLayers = {
+ "Spain": spainLayer,
+ "Italy": italyLayer,
+ "England": englandLayer,
+ "France": franceLayer,
+ "Germany": germanyLayer
+ };
+
+ L.control.layers(baseLayers, overlayLayers).addTo(map);
+	  
+ 
+	  
+
+	  
+     
+	
+      
+
+      
+      
+// L.geoJSON(teams, {
+//    pointToLayer: function (feature, latlng) {
+//        var iconUrl = 'englandlogos/manu.png';
+//        var markerOptions = {
+//            icon: L.icon({
+//                iconUrl: iconUrl,
+//                iconSize: [20], // set the size of the icon
+//                iconAnchor: [10, 10], // set the anchor point of the icon
+//            })
+//        };
+//        var marker = L.marker(latlng, markerOptions);
+//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                         "Country: " + feature.properties.Country);
+//        return marker;
+//    }
+// }).addTo(map);
+     
+//          function onEachFeature(feature, layer) {
+//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
+//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
+//                            "Country: " + feature.properties.Country);
+//       }}
+    
+    
+      
+ //     L.geoJSON(teams, {
+ //   onEachFeature: onEachFeature
+  // }).addTo(map);
+        
+
+      
+  //    var Logo = L.icon({
+  //  iconUrl: 'englandlogos/manu.png',
+           
+  //  iconSize: [25], // size of the icon
+
+    //  });
+      
+    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+      
   </script>
+	
+<!--	<div id="about" style="font-size: 0.9em; position: absolute; right: 25px; top: 25px; width: 500px; padding: 5px; background-color: #dfdfdf; box-shadow: 5px 5px #0000004f; z-index:9990; max-width: 90%; max-height: 90%; overflow-y: auto;">
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>X</div>
+			<h2>Battle of</h2>
+		<p style="font-size: 0.7em; font-style: italic; margin-block:0em; z-index: 9990;" target='_blank'>A <a href="https://carto.byu.edu/my-geo-collections">geo-collection</a> by <a href="http://carto.byu.edu/" target='_blank'>Brandon Plewe</a><br/>
+				<p>Many of us have seen these letters on mountain sides across the Western United States. Did you know there are more than 600 of them, including a few in the East
+				and around the world? Montana, Utah, and California each have at least 80. It all started at UC Berkeley in 1905 (or maybe in Lahaina Hawai'i in 1904?).</p>
+				<p>I've been collecting these for several years (no, I haven't been to most of them), including building a <a href="https://en.wikipedia.org/wiki/Hillside_letters" target="_blank">set of pages
+				on the subject</a> at Wikipedia. Thanks to several people who have added to that page, and if I'm missing one, let me know.</p>
+		<p>If you wish, you are welcome to <a href="https://byu.maps.arcgis.com/home/item.html?id=f0b23cab97ad4620871ea40df1c4394f">download the GIS data</a>
+		from ArcGIS Online. All I ask is that you give me credit if you use it.</p>
+ 
+		<p>Which one is part of your identity? Here's mine:</p>
+		<img src="ymountain.jpg" width="300px"/>
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>close</div>
+		</div> -->
     
     <style>
       .custom-popup .leaflet-popup-content-wrapper {
   background-color: #e6e6fa; /* light purple */
-  font-size: 12px; /* larger font size */
-   font-family: "Lucida Sans", sans-serif;
+  font-size: 16px; /* larger font size */
 }
 
 .custom-popup .leaflet-popup-tip {
@@ -72,6 +268,43 @@ var myLayer = L.geoJSON(teams, {
 
 .custom-popup .leaflet-popup-content {
   margin: 10px 10px 10px 10px; /* increase padding */
+}
+        
+   /*  .leaflet-control-layers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d8bfd8;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Lucida Sans", sans-serif;
+  font-size: 14px;
+  
+} */
+	    
+#slider-container {
+  width: 220px;
+  height: 30px;
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+}
+
+#slider {
+  z-index: 9999;
+  width: 200px;
+  height: 10px;
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
     </style>
     
