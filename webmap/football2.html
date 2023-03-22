@@ -39,24 +39,22 @@
   <script>
 	  
  $("#slider").slider({
-  min: 1,
-  max: 8,
+  min: 2015,
+  max: 2022,
   step: 1,
-  value: 4,
-  create: function(event, ui) {
-    // Create the markers for the seasons
-    for (var i = 15; i <= 22; i++) {
-      var label = (i % 100) + "/" + ((i+1) % 100);
-      $('<div class="slider-marker">' + label + '</div>').css('left', (i-15)*12.5 + '%').appendTo($("#slider"));
+  value: 1,
+  create: function() {
+    // Create ticks with labels for each year
+    for (var i = 2015; i <= 2022; i++) {
+      $("<span>").addClass("ui-slider-tick").css("left", (i - 2015) / 7 * 100 + "%")
+                 .text(i).appendTo($("#slider"));
     }
   },
-  slide: function(event, ui) {
-    // Update the active marker
-    $(".slider-marker.active").removeClass("active");
-    var label = (ui.value % 100) + "/" + ((ui.value+1) % 100);
-    $('.slider-marker:contains(' + label + ')').addClass("active");
+  stop: function(event, ui) {
+    alert("Year is " + ui.value)
   }
 });
+
 
 	  
     var map = L.map('map').setView([45, 3], 5);
