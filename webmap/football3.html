@@ -204,7 +204,7 @@ $("#slider").slider({
     var year = "S" + ui.value;
 
     // Loop through the GeoJSON features
-    map.eachLayer(function(layer) {
+    map.eachLayer(function(teams) {
       if (layer.feature && layer.feature.properties[year] === "1") {
         // Show the layer if it should be displayed
         if (layer.setStyle) {
