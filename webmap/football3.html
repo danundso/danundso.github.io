@@ -202,20 +202,29 @@ $("#slider").slider({
   stop: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
-    
+
     // Loop through the GeoJSON features
     map.eachLayer(function(layer) {
       if (layer.feature && layer.feature.properties[year] === "1") {
         // Show the layer if it should be displayed
-        layer.setStyle({ opacity: 1, fillOpacity: 1 });
-      } else if (layer.feature) {
+        if (layer.setStyle) {
+          layer.setStyle({ opacity: 1, fillOpacity: 1 });
+        } else {
+          layer.options.opacity = 1;
+          layer.options.fillOpacity = 1;
+        }
+      } else {
         // Hide the layer if it should not be displayed
-        layer.setStyle({ opacity: 0, fillOpacity: 0 });
+        if (layer.setStyle) {
+          layer.setStyle({ opacity: 0, fillOpacity: 0 });
+        } else {
+          layer.options.opacity = 0;
+          layer.options.fillOpacity = 0;
+        }
       }
     });
   }
 });
- 
 
 	  
      
