@@ -38,14 +38,26 @@
   <div id="slider"></div>
   <script>
 	  
- $(function() {
-  $("#slider").slider({
-    min: 1,
-    max: 7,
-    step: 1,
-    value: 4
-  });
+ $("#slider").slider({
+  min: 1,
+  max: 8,
+  step: 1,
+  value: 4,
+  create: function(event, ui) {
+    // Create the markers for the seasons
+    for (var i = 15; i <= 22; i++) {
+      var label = (i % 100) + "/" + ((i+1) % 100);
+      $('<div class="slider-marker">' + label + '</div>').css('left', (i-15)*12.5 + '%').appendTo($("#slider"));
+    }
+  },
+  slide: function(event, ui) {
+    // Update the active marker
+    $(".slider-marker.active").removeClass("active");
+    var label = (ui.value % 100) + "/" + ((ui.value+1) % 100);
+    $('.slider-marker:contains(' + label + ')').addClass("active");
+  }
 });
+
 	  
     var map = L.map('map').setView([45, 3], 5);
     
