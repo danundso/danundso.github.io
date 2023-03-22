@@ -56,19 +56,21 @@ $("#slider").slider({
     }
   },
   stop: function(event, ui) {
-    // Get the year selected by the slider
-    var year = "S" + ui.value;
+  // Get the year selected by the slider
+  var year = "S" + ui.value;
 
-    // Show/hide the teams based on the selected year
-    $(".teams").each(function() {
-      if ($(this).attr(year) === "1") {
-        $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-  }
-});
+  // Loop through the GeoJSON features
+  map.eachLayer(function(layer) {
+    if (layer.feature && layer.feature.properties[year] === "1") {
+      // Show the layer if it should be displayed
+      layer.setStyle({ opacity: 1, fillOpacity: 1 });
+    } else {
+      // Hide the layer if it should not be displayed
+      layer.setStyle({ opacity: 0, fillOpacity: 0 });
+    }
+  });
+}
+
 
 
 
