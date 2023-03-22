@@ -57,12 +57,12 @@ $("#slider").slider({
   },
   stop: function(event, ui) {
     // Get the year selected by the slider
-    var year = ui.value;
+    var year = "S" + ui.value;
 
     // Filter the teams based on the selected year
     var filteredTeams = $("path").filter(function() {
       // Check if the team was in the league during the selected year
-      return $(this).attr("S" + year) === "1";
+      return $(this).attr(year) === "1";
     });
 
     // Hide all teams
@@ -72,6 +72,7 @@ $("#slider").slider({
     filteredTeams.show();
   }
 });
+
 
 
 
