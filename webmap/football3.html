@@ -38,7 +38,7 @@
   <div id="slider"></div>
   <script>
 	
-	  $("#slider").slider({
+$("#slider").slider({
   min: 2015,
   max: 2022,
   step: 1,
@@ -54,23 +54,22 @@
         "padding-right": "3px"
       }).text(year).appendTo($("#slider"));
     }
-  }
-var teamlayer = L.geoJSON(teams)
-	  
+  },
   stop: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
 
-    // Loop through the GeoJSON features
-    teamlayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === "1") {
-        feature.setStyle({ opacity: 1, fillOpacity: 1 });
+    // Loop through the GeoJSON layers
+    teams.eachLayer(function(layer) {
+      if (layer.feature.properties[year]) {
+        layer.setStyle({ visible: true });
       } else {
-        layer.feature.setStyle({ opacity: 0, fillOpacity: 0 });
+        layer.setStyle({ visible: false });
       }
     });
   }
 });
+
 
 
 
