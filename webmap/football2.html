@@ -58,6 +58,7 @@ $("#slider").slider({
   stop: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
+	  alert("year is: " + year)
 
     // Filter the teams based on the selected year
     var filteredTeams = $("path").filter(function() {
