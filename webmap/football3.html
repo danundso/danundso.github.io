@@ -63,9 +63,9 @@ $("#slider").slider({
     // Loop through the GeoJSON layers
     teams1.eachLayer(function(layer) {
       if (layer.feature.properties[year]) {
-        layer.setStyle({ visible: true });
+        layer.options.visible = true;
       } else {
-        layer.setStyle({ visible: false });
+        layer.options.visible = false;
       }
     });
   }
