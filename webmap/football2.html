@@ -38,39 +38,6 @@
   <div id="slider"></div>
   <script>
 	  
-$("#slider").slider({
-  min: 2015,
-  max: 2022,
-  step: 1,
-  value: 1,
-  create: function() {
-    // Create ticks with labels for each year
-    for (var i = 2015; i <= 2022; i++) {
-      var year = "S" + String(i - 2000);
-      $("<span>").addClass("ui-slider-tick").css({
-        "left": (i - 2015) / 7 * 100 + "%",
-        "font-size": "10px",
-        "padding-left": "3px",
-        "padding-right": "3px"
-      }).text(year).appendTo($("#slider"));
-    }
-  },
-  stop: function(event, ui) {
-    // Get the year selected by the slider
-    var year = "S" + ui.value;
-
-    // Loop through the GeoJSON features
-    teams.eachLayer(function(layer) {
-      if (layer.feature.properties[year] === "1") {
-        layer.setStyle({ opacity: 1, fillOpacity: 1 });
-      } else {
-        layer.setStyle({ opacity: 0, fillOpacity: 0 });
-      }
-    });
-  }
-});
-
-
 
 
 
@@ -217,6 +184,42 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers).addTo(map);
+	  
+	  
+	  
+	  
+	  
+$("#slider").slider({
+  min: 2015,
+  max: 2022,
+  step: 1,
+  value: 1,
+  create: function() {
+    // Create ticks with labels for each year
+    for (var i = 2015; i <= 2022; i++) {
+      var year = "S" + String(i - 2000);
+      $("<span>").addClass("ui-slider-tick").css({
+        "left": (i - 2015) / 7 * 100 + "%",
+        "font-size": "10px",
+        "padding-left": "3px",
+        "padding-right": "3px"
+      }).text(year).appendTo($("#slider"));
+    }
+  },
+  stop: function(event, ui) {
+    // Get the year selected by the slider
+    var year = "S" + ui.value;
+
+    // Loop through the GeoJSON features
+    teams.eachLayer(function(layer) {
+      if (layer.feature.properties[year] === "1") {
+        layer.setStyle({ opacity: 1, fillOpacity: 1 });
+      } else {
+        layer.setStyle({ opacity: 0, fillOpacity: 0 });
+      }
+    });
+  }
+});
 	  
  
 	  
