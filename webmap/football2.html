@@ -211,11 +211,11 @@ $("#slider").slider({
     var year = "S" + ui.value;
 
     // Loop through the GeoJSON features
-    teams.onEachFeature (function(feature, layer) {
-      if (feature.properties[year] === "1") {
+    englandlayer.onEachFeature (function(layer) {
+      if (layer.feature.properties[year] === "1") {
         feature.setStyle({ opacity: 1, fillOpacity: 1 });
       } else {
-        feature.setStyle({ opacity: 0, fillOpacity: 0 });
+        layer.feature.setStyle({ opacity: 0, fillOpacity: 0 });
       }
     });
   }
