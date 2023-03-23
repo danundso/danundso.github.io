@@ -211,7 +211,7 @@ $("#slider").slider({
     var year = "S" + ui.value;
 
     // Loop through the GeoJSON features
-    englandlayer.onEachFeature (function(layer) {
+    englandLayer.onEachFeature (function(layer) {
       if (layer.feature.properties[year] === "1") {
         feature.setStyle({ opacity: 1, fillOpacity: 1 });
       } else {
