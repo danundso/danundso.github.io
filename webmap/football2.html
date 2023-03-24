@@ -58,6 +58,8 @@
   stop: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
+	  
+	  alert("Year is: " + year)
 
     // Loop through the GeoJSON features
     teams.eachLayer (function(layer) {
