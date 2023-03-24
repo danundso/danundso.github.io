@@ -68,6 +68,38 @@
         layer.setOpacity(0);
       }
     });
+	  spainLayer.eachLayer (function(layer) {
+      if (layer.feature.properties[year] === 1) {
+        layer.setOpacity(1);
+      } else {
+        layer.setOpacity(0);
+      }
+    });
+	  
+	  germanyLayer.eachLayer (function(layer) {
+      if (layer.feature.properties[year] === 1) {
+        layer.setOpacity(1);
+      } else {
+        layer.setOpacity(0);
+      }
+    });
+	  
+	  franceLayer.eachLayer (function(layer) {
+      if (layer.feature.properties[year] === 1) {
+        layer.setOpacity(1);
+      } else {
+        layer.setOpacity(0);
+      }
+    });
+	  
+	  italyLayer.eachLayer (function(layer) {
+      if (layer.feature.properties[year] === 1) {
+        layer.setOpacity(1);
+      } else {
+        layer.setOpacity(0);
+      }
+    });
+	  
   }
 });
 
