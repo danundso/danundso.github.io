@@ -63,9 +63,9 @@
     // Loop through the GeoJSON features
     englandLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map);
+        layer.getElement().style.visibility = "visible";
       } else {
-        layer.removeFrom(map);
+        layer.getElement().style.visibility = "hidden";
       }
     });
 	  spainLayer.eachLayer (function(layer) {
