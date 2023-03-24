@@ -70,33 +70,33 @@
     });
 	  spainLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map);
+        layer.getElement().style.visibility = "visible";
       } else {
-        layer.removeFrom(map);
+        layer.getElement().style.visibility = "hidden";
       }
     });
 	  
 	  germanyLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map);
+        layer.getElement().style.visibility = "visible";
       } else {
-        layer.removeFrom(map);
+        layer.getElement().style.visibility = "hidden";
       }
     });
 	  
 	  franceLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map);
+        layer.getElement().style.visibility = "visible";
       } else {
-        layer.removeFrom(map);
+        layer.getElement().style.visibility = "hidden";
       }
     });
 	  
 	  italyLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map);
+        layer.getElement().style.visibility = "visible";
       } else {
-        layer.removeFrom(map);
+        layer.getElement().style.visibility = "hidden";
       }
     });
 	  
