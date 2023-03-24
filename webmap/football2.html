@@ -62,7 +62,7 @@
 	  alert("Year is: " + year)
 
     // Loop through the GeoJSON features
-    teams.eachLayer (function(layer) {
+    englandLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
         feature.setStyle({ opacity: 1, fillOpacity: 1 });
       } else {
