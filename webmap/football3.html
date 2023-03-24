@@ -64,8 +64,10 @@
     englandLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
         layer.setOpacity(1);
+	layer.setInteractive(true);
       } else {
         layer.setOpacity(0);
+	layer.setInteractive(false);
       }
     });
 	  spainLayer.eachLayer (function(layer) {
