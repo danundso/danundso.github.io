@@ -64,9 +64,9 @@
     // Loop through the GeoJSON features
     englandLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        feature.setStyle({ opacity: 1, fillOpacity: 1 });
+        layer.setOpacity(1);
       } else {
-        layer.feature.setStyle({ opacity: 0, fillOpacity: 0 });
+        layer.setOpacity(0);
       }
     });
   }
