@@ -63,40 +63,40 @@
     // Loop through the GeoJSON features
     englandLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.addTo(map)
+        layer.addTo(map);
       } else {
         layer.removeFrom(map);
       }
     });
 	  spainLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.setOpacity(1);
+        layer.addTo(map);
       } else {
-        layer.setOpacity(0);
+        layer.removeFrom(map);
       }
     });
 	  
 	  germanyLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.setOpacity(1);
+        layer.addTo(map);
       } else {
-        layer.setOpacity(0);
+        layer.removeFrom(map);
       }
     });
 	  
 	  franceLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.setOpacity(1);
+        layer.addTo(map);
       } else {
-        layer.setOpacity(0);
+        layer.removeFrom(map);
       }
     });
 	  
 	  italyLayer.eachLayer (function(layer) {
       if (layer.feature.properties[year] === 1) {
-        layer.setOpacity(1);
+        layer.addTo(map);
       } else {
-        layer.setOpacity(0);
+        layer.removeFrom(map);
       }
     });
 	  
