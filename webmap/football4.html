@@ -161,11 +161,29 @@
 	  
     var map = L.map('map').setView([45, 3], 5);
     
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     minZoom: 3,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+var basemapSelector = document.getElementById('basemap-selector');
+
+basemapSelector.addEventListener('change', function() {
+    var selectedBasemap = this.value;
+    switch(selectedBasemap) {
+        case 'osm':
+            map.removeLayer(satelliteLayer);
+            break;
+        case 'satellite':
+            var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 19,
+                attribution: 'Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+            satelliteLayer.addTo(map);
+            break;
+    }
+});
     
 var geojsonFeature = {
     "type": "Feature",
@@ -345,19 +363,6 @@ var overlayLayers = {
 	  
 	  
 	  
-var basemapSelector = document.getElementById('basemap-selector');
-
-basemapSelector.addEventListener('change', function() {
-    var selectedBasemap = this.value;
-    switch(selectedBasemap) {
-        case 'osm':
-            map.setTileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
-            break;
-        case 'satellite':
-            map.setTileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-            break;
-    }
-});
 
 	  
 	  
