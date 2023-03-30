@@ -59,7 +59,7 @@
     // Get the year selected by the slider
     var year = "S" + ui.value;
 	  
-    var championsLeagueSelected = map.hasLayerchampionsLayer;
+    var championsLeagueSelected = map.hasLayer(championsLayer);
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
