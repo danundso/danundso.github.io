@@ -187,10 +187,10 @@ var spainLayer = L.geoJSON(teams, {
                                 {className: 'custom-popup'});
 
     map.on('zoomend', function() {
-      if (map.getZoom() >= 13) {
+      if (map.getZoom() >= 11) {
         marker.setIcon(L.icon({
           iconUrl: feature.properties.icon || "ball.png",
-          iconSize: [45],
+          iconSize: [55],
           iconAnchor: [22, 22]
         }));
       } else {
