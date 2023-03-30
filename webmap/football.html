@@ -59,7 +59,7 @@
     // Get the year selected by the slider
     var year = "S" + ui.value;
 	  
-    var championsLeagueSelected = championsLayer;
+    var championsLeagueSelected = map.hasLayerchampionsLayer;
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
@@ -70,7 +70,7 @@
         layer.getElement().style.visibility = "hidden";
       }
     } else {
-      if (layer.feature.properties[year] === 1) {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
@@ -85,7 +85,7 @@
         layer.getElement().style.visibility = "hidden";
       }
     } else {
-      if (layer.feature.properties[year] === 1) {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
@@ -101,7 +101,7 @@
         layer.getElement().style.visibility = "hidden";
       }
     } else {
-      if (layer.feature.properties[year] === 1) {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
@@ -117,7 +117,7 @@
         layer.getElement().style.visibility = "hidden";
       }
     } else {
-      if (layer.feature.properties[year] === 1) {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
@@ -133,7 +133,7 @@
         layer.getElement().style.visibility = "hidden";
       }
     } else {
-      if (layer.feature.properties[year] === 1) {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
