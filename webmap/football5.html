@@ -34,9 +34,9 @@
 			position: absolute;
 			top: 0px;
 			right: 0px;
-			height: 400px;
-			width: 200px;
-			background-color: white;
+			height: 340px;
+			width: 2400px;
+			background-color: #fae8e8;
 			opacity: 0.8;
 			z-index: 9700;
 			padding: 10px;
@@ -375,8 +375,10 @@ var overlayLayers = {
  "Germany": germanyLayer
  };
 
- L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
-	  
+ var layerControl = L.control.layers(baseLayers, overlayLayers, {collapsed: false});
+
+layerControl.addTo(map);
+
 layerControl.getContainer().style.zIndex = 9991;
     
     
