@@ -186,9 +186,26 @@ var spainLayer = L.geoJSON(teams, {
                       "Country: " + feature.properties.Country,
                                 {className: 'custom-popup'});
 
+    map.on('zoomend', function() {
+      if (map.getZoom() >= 13) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [45],
+          iconAnchor: [22, 22]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
+
     return marker;
   }
 }).addTo(map);
+
 
 var italyLayer = L.geoJSON(teams, {
   filter: function(feature) {
