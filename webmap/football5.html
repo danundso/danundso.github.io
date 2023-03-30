@@ -376,6 +376,8 @@ var overlayLayers = {
  };
 
  L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
+	  
+layerControl.getContainer().style.zIndex = 9991;
     
     
 	  
