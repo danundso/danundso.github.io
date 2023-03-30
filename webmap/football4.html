@@ -161,11 +161,18 @@
 	  
     var map = L.map('map').setView([45, 3], 5);
     
-   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   var map = L.map('map').setView([45, 3], 5);
+    
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     minZoom: 3,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: 'Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
 
 var basemapSelector = document.getElementById('basemap-selector');
 
@@ -174,16 +181,15 @@ basemapSelector.addEventListener('change', function() {
     switch(selectedBasemap) {
         case 'osm':
             map.removeLayer(satelliteLayer);
+            openStreetMapLayer.addTo(map);
             break;
         case 'satellite':
-            var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                maxZoom: 19,
-                attribution: 'Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            });
+            map.removeLayer(openStreetMapLayer);
             satelliteLayer.addTo(map);
             break;
     }
 });
+
     
 var geojsonFeature = {
     "type": "Feature",
