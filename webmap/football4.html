@@ -38,11 +38,11 @@
 	
   <div id="slider"></div>
 	
-	<div id="basemap-selector">
-    <select>
-        <option value="osm">OpenStreetMap</option>
-        <option value="satellite">Satellite Imagery</option>
-    </select>
+	<div id="basemap-selector-container">
+  <select id="basemap-selector">
+    <option value="osm">OpenStreetMap</option>
+    <option value="satellite">Satellite Imagery</option>
+  </select>
 </div>
 	
   <script>
@@ -345,7 +345,7 @@ var overlayLayers = {
 	  
 	  
 	  
-	  var basemapSelector = document.getElementById('basemap-selector');
+var basemapSelector = document.getElementById('basemap-selector');
 
 basemapSelector.addEventListener('change', function() {
     var selectedBasemap = this.value;
@@ -492,9 +492,21 @@ basemapSelector.addEventListener('change', function() {
   width: 200px;
 }
 	    
+#basemap-selector-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 9990;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 #basemap-selector {
-	z-index: 9999;
-	    }
+  width: 150px;
+  font-size: 14px;
+}
     </style>
     
   </body>
