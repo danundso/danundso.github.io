@@ -314,7 +314,7 @@ var overlayLayers = {
  "Germany": germanyLayer
  };
 
- L.control.layers(baseLayers, overlayLayers).addTo(map);
+ L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
 	  
 	  
 	  
@@ -441,6 +441,12 @@ var overlayLayers = {
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
+}
+	   
+ .champions-popup {
+  font-size: 16px;
+  padding: 10px;
+  width: 200px;
 }
     </style>
     
