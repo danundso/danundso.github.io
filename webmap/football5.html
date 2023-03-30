@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Teams</title>
+    <link rel="icon" href="ball.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/pepper-grinder/jquery-ui.css"/>
+     
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <script src="AllFiveLeaguesTry0301.js"
+     crossorigin=""></script>
+
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <style>#slider { margin: 10px; }  </style>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+     
+     <style>
+      #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
+	     
+	     .infobox { position: absolute;
+       left:15px; width: 500px; top: 15px;
+       z-index: 20; padding: 5px; border-radius: 5px;
+       background-color: #ffffff; opacity: 0.7;
+       }
+       
+       #controls {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			height: 500px;
+			width: 200px;
+			background-color: white;
+			opacity: 0.5;
+			z-index: 2;
+			padding: 10px;
+		}
+	     
+      </style>
+    
+</head>
+<body>
+  <div id = "map"></div>
+  
+  <div id="controls">
+	
+  <div id="slider"></div>
+	
+	<div id="basemap-selector-container">
+  <select id="basemap-selector">
+    <option value="osm">OpenStreetMap</option>
+    <option value="satellite">Satellite Imagery</option>
+  </select>
+</div>
+	
+  <script>
+	
+	  $("#slider").slider({
+  min: 2015,
+  max: 2022,
+  step: 1,
+  value: 1,
+  create: function() {
+    // Create ticks with labels for each year
+    for (var i = 2015; i <= 2022; i++) {
+      var year = "S" + String(i - 2000);
+      $("<span>").addClass("ui-slider-tick").css({
+        "left": (i - 2015) / 7 * 100 + "%",
+        "font-size": "10px",
+        "padding-left": "3px",
+        "padding-right": "3px"
+      }).text(year).appendTo($("#slider"));
+    }
+  },
+  slide: function(event, ui) {
+    // Get the year selected by the slider
+    var year = "S" + ui.value;
+	  
+    var championsLeagueSelected = map.hasLayer(championsLayer);
+
+    // Loop through the GeoJSON features
+   englandLayer.eachLayer(function(layer) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  });
+	  spainLayer.eachLayer(function(layer) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  });
+	  
+	  germanyLayer.eachLayer(function(layer) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  });
+	  
+	  franceLayer.eachLayer(function(layer) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  });
+	  
+	  italyLayer.eachLayer(function(layer) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  });
+	  
+	  
+  }
+});
+
+
+
+
+    
+   var map = L.map('map').setView([45, 3], 5);
+    
+var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    minZoom: 3,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: 'Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+var basemapSelector = document.getElementById('basemap-selector');
+
+basemapSelector.addEventListener('change', function() {
+    var selectedBasemap = this.value;
+    switch(selectedBasemap) {
+        case 'osm':
+            map.removeLayer(satelliteLayer);
+            openStreetMapLayer.addTo(map);
+            break;
+        case 'satellite':
+            map.removeLayer(openStreetMapLayer);
+            satelliteLayer.addTo(map);
+            break;
+    }
+});
+
+    
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "icon": "ball.png"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [0, 0]
+    }
+};
+
+var spainLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Spain" || feature.properties.Country === "Spain ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                                {className: 'custom-popup'});
+
+    map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
+
+    return marker;
+  }
+}).addTo(map);
+
+
+var italyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Italy ";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                          {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var englandLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "England";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [14, 14]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+
+var franceLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "France";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                         {className: 'custom-popup'});
+
+    return marker;
+      }
+    }).addTo(map);
+
+
+var germanyLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Country === "Germany";
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                        {className: 'custom-popup'});
+
+    return marker;
+  }
+}).addTo(map);
+	  
+	  
+var championsLayer = L.geoJSON(teams, {
+  filter: function(feature) {
+    return feature.properties.Attribute === 2;
+  },
+  pointToLayer: function(feature, latlng) {
+    var marker = L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: feature.properties.icon || "ball.png",
+        iconSize: [25],
+        iconAnchor: [12, 12]
+      })
+    });
+
+    marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
+                      "Country: " + feature.properties.Country,
+                          {className: 'custom-popup'});
+
+    return marker;
+  }
+});
+	  
+	  
+      
+  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
+      
+      var baseLayers = {
+ "All Teams": group
+ };
+
+var overlayLayers = {
+ "Champions League": championsLayer,
+ "Spain": spainLayer,
+ "Italy": italyLayer,
+ "England": englandLayer,
+ "France": franceLayer,
+ "Germany": germanyLayer
+ };
+
+ L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
+    
+    </div>
+	  
+	  
+	  
+	  
+
+
+      
+      
+
+      
+  </script>
+	
+<!--	<div id="about" style="font-size: 0.9em; position: absolute; right: 25px; top: 25px; width: 500px; padding: 5px; background-color: #dfdfdf; box-shadow: 5px 5px #0000004f; z-index:9990; max-width: 90%; max-height: 90%; overflow-y: auto;">
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>X</div>
+			<h2>Battle of</h2>
+		<p style="font-size: 0.7em; font-style: italic; margin-block:0em; z-index: 9990;" target='_blank'>A <a href="https://carto.byu.edu/my-geo-collections">geo-collection</a> by <a href="http://carto.byu.edu/" target='_blank'>Brandon Plewe</a><br/>
+				<p>Many of us have seen these letters on mountain sides across the Western United States. Did you know there are more than 600 of them, including a few in the East
+				and around the world? Montana, Utah, and California each have at least 80. It all started at UC Berkeley in 1905 (or maybe in Lahaina Hawai'i in 1904?).</p>
+				<p>I've been collecting these for several years (no, I haven't been to most of them), including building a <a href="https://en.wikipedia.org/wiki/Hillside_letters" target="_blank">set of pages
+				on the subject</a> at Wikipedia. Thanks to several people who have added to that page, and if I'm missing one, let me know.</p>
+		<p>If you wish, you are welcome to <a href="https://byu.maps.arcgis.com/home/item.html?id=f0b23cab97ad4620871ea40df1c4394f">download the GIS data</a>
+		from ArcGIS Online. All I ask is that you give me credit if you use it.</p>
+ 
+		<p>Which one is part of your identity? Here's mine:</p>
+		<img src="ymountain.jpg" width="300px"/>
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>close</div>
+		</div> -->
+    
+    <style>
+      .custom-popup .leaflet-popup-content-wrapper {
+  background-color: #e6e6fa; /* light purple */
+  font-size: 16px; /* larger font size */
+}
+
+.custom-popup .leaflet-popup-tip {
+  background-color: #e6e6fa; /* light purple */
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 10px 10px 10px 10px; /* increase padding */
+}
+        
+   /*  .leaflet-control-layers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d8bfd8;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Lucida Sans", sans-serif;
+  font-size: 14px;
+  
+} */
+	    
+#slider-container {
+  width: 220px;
+  height: 30px;
+  position: fixed;
+  right: 10px;
+  top: 300px;
+  transform: translateY(-50%);
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+}
+
+#slider {
+  z-index: 9999;
+  width: 200px;
+  height: 10px;
+  position: fixed;
+  right: 10px;
+  top: 300px;
+  transform: translateY(-50%);
+}
+	   
+ .champions-popup {
+  font-size: 16px;
+  padding: 10px;
+  width: 200px;
+}
+	    
+#basemap-selector-container {
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  z-index: 9990;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#basemap-selector {
+  width: 150px;
+  font-size: 14px;
+}
+    </style>
+    
+  </body>
+</html>
