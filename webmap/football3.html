@@ -50,7 +50,9 @@
 </div>
 		
   <script>
+	  var year1 = "S" + $("#slider").slider("value");
 	
+	  
 	  $("#slider").slider({
   min: 2015,
   max: 2022,
@@ -376,8 +378,22 @@ var overlayLayers = {
  var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
 
 layerControl.addTo(map);
-
 layerControl.getContainer().style.zIndex = 9999;
+	  
+	  layerControl.on("overlayadd", function(event) {
+  if (event.layer === championsLayer) {
+    // Update the filter function to only show features with a value of 2 in the attribute column
+    championsLayer.setFilter(function(feature) {
+      var time = slider.getValue(); // Get the value from your time slider
+      return layer.feature.properties[year1] === 2 ;
+    });
+  }
+});
+
+// Set the initial filter function to only show features with a value of 2 in the attribute column
+championsLayer.setFilter(function(feature) {
+  return layer.feature.properties[year1] === 2;
+});
     
     
 
