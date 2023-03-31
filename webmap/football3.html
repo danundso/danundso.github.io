@@ -50,7 +50,7 @@
 </div>
 		
   <script>
-	  var year1 = "S" + $("#slider").slider("value");
+	 
 	
 	  
 	  $("#slider").slider({
@@ -379,6 +379,8 @@ var overlayLayers = {
 
 layerControl.addTo(map);
 layerControl.getContainer().style.zIndex = 9999;
+	  
+	  var year1 = "S" + $("#slider").slider("value");
 	  
 	  layerControl.on("overlayadd", function(event) {
   if (event.layer === championsLayer) {
