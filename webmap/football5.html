@@ -357,11 +357,11 @@ var championsLayer = L.geoJSON(teams, {
 	  
 	  
       
-  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
+//  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
       
-      var baseLayers = {
- "All Teams": group
- };
+ //     var baseLayers = {
+// "All Teams": group
+// };
 
 var overlayLayers = {
  "Champions League": championsLayer,
@@ -372,7 +372,8 @@ var overlayLayers = {
  "Germany": germanyLayer
  };
 
- var layerControl = L.control.layers(baseLayers, overlayLayers, {collapsed: false});
+// var layerControl = L.control.layers(baseLayers, overlayLayers, {collapsed: false});
+ var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
 
 layerControl.addTo(map);
 
