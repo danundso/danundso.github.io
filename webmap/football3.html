@@ -380,10 +380,20 @@ var overlayLayers = {
 layerControl.addTo(map);
 layerControl.getContainer().style.zIndex = 9999;
 	  
-	  var year1 = "S" + $("#slider").slider("value");
-	  
-	  championsLayer.setFilter(function(feature) {
-  return feature.properties[year1] === 2;
+	  map.on("layeradd", function(event) {
+  if (event.layer === championsLayer) {
+    championsLayer.setFilter(function(feature) {
+      return layer.feature.properties[year1] === 2;
+    });
+  }
+});
+
+map.on("layerremove", function(event) {
+  if (event.layer === championsLayer) {
+    championsLayer.setFilter(function(feature) {
+      return true;
+    });
+  }
 });
     
     
