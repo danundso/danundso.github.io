@@ -93,6 +93,7 @@
   }});
    
 	  spainLayer.eachLayer(function(layer) {
+ if (map.hasLayer(spainLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -106,9 +107,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  germanyLayer.eachLayer(function(layer) {
+   if (map.hasLayer(germanyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -122,9 +124,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  franceLayer.eachLayer(function(layer) {
+   if (map.hasLayer(franceLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -138,9 +141,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  italyLayer.eachLayer(function(layer) {
+ if (map.hasLayeritalyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -154,9 +158,8 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
-	  
-	  
+  }});
+	  	  
   }
 });
 
