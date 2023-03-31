@@ -144,7 +144,7 @@
   }});
 	  
 	  italyLayer.eachLayer(function(layer) {
- if (map.hasLayeritalyLayer)) {
+ if (map.hasLayer(italyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -159,7 +159,8 @@
       }
     }
   }});
-	  	  
+	
+	  
   }
 });
 
