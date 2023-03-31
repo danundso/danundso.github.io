@@ -76,6 +76,7 @@
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
+	   if (map.hasLayer(englandLayer) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -90,6 +91,7 @@
       }
     }
   });
+  };
 	  spainLayer.eachLayer(function(layer) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
