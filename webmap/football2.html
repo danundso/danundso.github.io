@@ -29,16 +29,29 @@
        z-index: 20; padding: 5px; border-radius: 5px;
        background-color: #ffffff; opacity: 0.7;
        }
+       
+      
 	     
       </style>
     
 </head>
 <body>
   <div id = "map"></div>
+  
+  <div id="controls"></div>
+	
   <div id="slider"></div>
+	
+	<div id="basemap-selector-container">
+  <select id="basemap-selector">
+    <option value="osm">Basemap</option>
+    <option value="satellite">Satellite Imagery</option>
+  </select>
+</div>
+		
   <script>
 	
-	  $("#slider").slider({
+var timeslider =  $("#slider").slider({
   min: 2015,
   max: 2022,
   step: 1,
@@ -55,51 +68,98 @@
       }).text(year).appendTo($("#slider"));
     }
   },
-  stop: function(event, ui) {
+  slide: function(event, ui) {
     // Get the year selected by the slider
     var year = "S" + ui.value;
 	  
+    var championsLeagueSelected = map.hasLayer(championsLayer);
 
     // Loop through the GeoJSON features
-    englandLayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === 1) {
+   englandLayer.eachLayer(function(layer) {
+    if (map.hasLayer(englandLayer)) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
       }
-    });
-	  spainLayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === 1) {
+    } else {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
       }
-    });
+    }
+  }});
+   
+	  spainLayer.eachLayer(function(layer) {
+ if (map.hasLayer(spainLayer)) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  }});
 	  
-	  germanyLayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === 1) {
+	  germanyLayer.eachLayer(function(layer) {
+   if (map.hasLayer(germanyLayer)) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
       }
-    });
-	  
-	  franceLayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === 1) {
+    } else {
+      if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
       }
-    });
+    }
+  }});
 	  
-	  italyLayer.eachLayer (function(layer) {
-      if (layer.feature.properties[year] === 1) {
+	  franceLayer.eachLayer(function(layer) {
+   if (map.hasLayer(franceLayer)) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
       }
-    });
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  }});
 	  
+	  italyLayer.eachLayer(function(layer) {
+ if (map.hasLayer(italyLayer)) {
+    if (championsLeagueSelected) {
+      if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    } else {
+      if (layer.feature.properties[year]) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    }
+  }});
+	
 	  
   }
 });
@@ -107,15 +167,37 @@
 
 
 
-
-	  
-    var map = L.map('map').setView([45, 3], 5);
     
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   var map = L.map('map').setView([45, 3], 5);
+    
+var openStreetMapLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
     minZoom: 3,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'
 }).addTo(map);
+
+
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: 'Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+var basemapSelector = document.getElementById('basemap-selector');
+
+basemapSelector.addEventListener('change', function() {
+    var selectedBasemap = this.value;
+    switch(selectedBasemap) {
+        case 'osm':
+            map.removeLayer(satelliteLayer);
+            openStreetMapLayer.addTo(map);
+            break;
+        case 'satellite':
+            map.removeLayer(openStreetMapLayer);
+            satelliteLayer.addTo(map);
+            break;
+    }
+});
+
     
 var geojsonFeature = {
     "type": "Feature",
@@ -145,9 +227,26 @@ var spainLayer = L.geoJSON(teams, {
                       "Country: " + feature.properties.Country,
                                 {className: 'custom-popup'});
 
+    map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
+
     return marker;
   }
 }).addTo(map);
+
 
 var italyLayer = L.geoJSON(teams, {
   filter: function(feature) {
@@ -234,6 +333,7 @@ var germanyLayer = L.geoJSON(teams, {
   }
 }).addTo(map);
 	  
+	  
 var championsLayer = L.geoJSON(teams, {
   filter: function(feature) {
     return feature.properties.Attribute === 2;
@@ -250,18 +350,27 @@ var championsLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
-
     return marker;
-  }
+  },
+	 id: 'myChampionsLayerId'
 });
+
+	  
+	  if (map.hasLayer(championsLayer)) {
+  alert("Poo poo")
+} else {
+  alert("pee pee")
+}
+
+		  
 	  
 	  
       
-  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
+//  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
       
-      var baseLayers = {
- "All Teams": group
- };
+ //     var baseLayers = {
+// "All Teams": group
+// };
 
 var overlayLayers = {
  "Champions League": championsLayer,
@@ -272,63 +381,23 @@ var overlayLayers = {
  "Germany": germanyLayer
  };
 
- L.control.layers(baseLayers, overlayLayers).addTo(map);
-	  
-	  
-	  
-	  
-	  
+// var layerControl = L.control.layers(baseLayers, overlayLayers, {collapsed: false});
+ var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
 
-	  
- 
-	  
+layerControl.addTo(map);
 
-	  
-     
-	
-      
-
-      
-      
-// L.geoJSON(teams, {
-//    pointToLayer: function (feature, latlng) {
-//        var iconUrl = 'englandlogos/manu.png';
-//        var markerOptions = {
-//            icon: L.icon({
-//                iconUrl: iconUrl,
-//                iconSize: [20], // set the size of the icon
-//                iconAnchor: [10, 10], // set the anchor point of the icon
-//            })
-//        };
-//        var marker = L.marker(latlng, markerOptions);
-//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                         "Country: " + feature.properties.Country);
-//        return marker;
-//    }
-// }).addTo(map);
-     
-//          function onEachFeature(feature, layer) {
-//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
-//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                            "Country: " + feature.properties.Country);
-//       }}
+layerControl.getContainer().style.zIndex = 9999;
     
     
-      
- //     L.geoJSON(teams, {
- //   onEachFeature: onEachFeature
-  // }).addTo(map);
-        
+	  
+	  
+	  
+	  
+
 
       
-  //    var Logo = L.icon({
-  //  iconUrl: 'englandlogos/manu.png',
-           
-  //  iconSize: [25], // size of the icon
-
-    //  });
       
-    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+
       
   </script>
 	
@@ -379,8 +448,8 @@ var overlayLayers = {
   width: 220px;
   height: 30px;
   position: fixed;
-  right: 20px;
-  top: 50%;
+  right: 10px;
+  top: 300px;
   transform: translateY(-50%);
   border: 1px solid #ccc;
   background-color: white;
@@ -394,10 +463,44 @@ var overlayLayers = {
   width: 200px;
   height: 10px;
   position: fixed;
-  right: 20px;
-  top: 50%;
+  right: 10px;
+  top: 260px;
   transform: translateY(-50%);
 }
+	   
+ .champions-popup {
+  font-size: 16px;
+  padding: 10px;
+  width: 200px;
+}
+	    
+#basemap-selector-container {
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  z-index: 9990;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#basemap-selector {
+  width: 150px;
+  font-size: 14px;
+}
+	    
+	    #controls {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			height: 300px;
+			width: 240px;
+			background-color: #FCF6F5;
+			opacity: 0.85;
+			z-index: 500;
+			padding: 10px;
+		}
     </style>
     
   </body>
