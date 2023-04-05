@@ -351,7 +351,8 @@ var championsLayer = L.geoJSON(teams, {
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
     return marker;
-  }
+  },
+	 id: 'myChampionsLayerId'
 });
 	  function filterTeamsByYear(year) {
   championsLayer.clearLayers(); // Remove all markers from the champions layer
