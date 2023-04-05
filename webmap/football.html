@@ -114,6 +114,9 @@
     var year = "S" + ui.value;
 	  
     var championsLeagueSelected = map.hasLayer(championsLayer);
+	  
+   var promotedTeams = [];
+   var relegatedTeams = [];
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
@@ -536,7 +539,7 @@ layerControl.getContainer().style.zIndex = 9999;
 	    
 	    #info-box {
   position: fixed;
-  top: 100px;
+  top: 400px;
   right: 10px;
   width: 300px;
   padding: 10px;
