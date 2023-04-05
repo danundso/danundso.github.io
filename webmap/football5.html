@@ -335,9 +335,9 @@ var germanyLayer = L.geoJSON(teams, {
 	  
 	  
 var championsLayer = L.geoJSON(teams, {
-  filter: function(feature) {
-    return feature.properties.Attribute === 2;
-  },
+//  filter: function(feature) {
+//    return feature.properties.Attribute === 2;
+//  },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
       icon: L.icon({
