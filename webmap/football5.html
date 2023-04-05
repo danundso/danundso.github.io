@@ -355,13 +355,16 @@ var championsLayer = L.geoJSON(teams, {
   }
 });
 	  
-	  year3 = timeslider.slider("value")
-	  if (map.hasLayer(championsLayer)){
-		  if (layer.feature.properties[year] === 2) {
-        layer.getElement().style.visibility = "visible";
+	  year3 = "S" + timeslider.slider("value")
+	  
+	  if (map.hasLayer(championsLayer)) {
+        germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
       } else {
-        layer.getElement().style.visibility = "hidden";
-      }};	  
+        map.removeLayer(layer);
+      }
+    });	  
 		  
 	  
 	  
