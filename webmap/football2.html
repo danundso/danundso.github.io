@@ -355,6 +355,19 @@ var championsLayer = L.geoJSON(teams, {
 	 id: 'myChampionsLayerId'
 });
 
+	  map.on('overlayadd', function(e) {
+  if (e.layer.options.id === 'myChampionsLayerId') {
+    map.addLayer(championsLayer);
+  }
+});
+
+// Add event listener for the layer control
+map.on('overlayremove', function(e) {
+  if (e.layer.options.id === 'myChampionsLayerId') {
+    map.removeLayer(championsLayer);
+  }
+});
+	  
 	  
 	  if (map.hasLayer(championsLayer)) {
   alert("Poo poo")
