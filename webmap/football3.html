@@ -50,10 +50,8 @@
 </div>
 		
   <script>
-	 
 	
-	  
-	  $("#slider").slider({
+var timeslider =  $("#slider").slider({
   min: 2015,
   max: 2022,
   step: 1,
@@ -352,10 +350,28 @@ var championsLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
-
     return marker;
   }
 });
+	  function filterTeamsByYear(year) {
+  championsLayer.clearLayers(); // Remove all markers from the champions layer
+  championsLayer.addData(teams.filter(function(feature) {
+    return feature.properties.Attribute === 2 && feature.properties.Year === year;
+  }));
+}
+	  
+	  
+	  year3 = "S" + timeslider.slider("value")
+	  
+	  if (map.hasLayer(championsLayer)) {
+        germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
+      } else {
+        map.removeLayer(layer);
+      }
+    });	  
+		  
 	  
 	  
       
@@ -378,30 +394,37 @@ var overlayLayers = {
  var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
 
 layerControl.addTo(map);
-layerControl.getContainer().style.zIndex = 9999;
-	  
-	  map.on("layeradd", function(event) {
-  if (event.layer === championsLayer) {
-    championsLayer.setFilter(function(feature) {
-      return layer.feature.properties[year1] === 2;
-    });
-  }
-});
 
-map.on("layerremove", function(event) {
-  if (event.layer === championsLayer) {
-    championsLayer.setFilter(function(feature) {
-      return true;
-    });
-  }
-});
+layerControl.getContainer().style.zIndex = 9999;
     
     
+	  
+	  
+	  
+	  
+
+
+      
+      
 
       
   </script>
 	
-
+<!--	<div id="about" style="font-size: 0.9em; position: absolute; right: 25px; top: 25px; width: 500px; padding: 5px; background-color: #dfdfdf; box-shadow: 5px 5px #0000004f; z-index:9990; max-width: 90%; max-height: 90%; overflow-y: auto;">
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>X</div>
+			<h2>Battle of</h2>
+		<p style="font-size: 0.7em; font-style: italic; margin-block:0em; z-index: 9990;" target='_blank'>A <a href="https://carto.byu.edu/my-geo-collections">geo-collection</a> by <a href="http://carto.byu.edu/" target='_blank'>Brandon Plewe</a><br/>
+				<p>Many of us have seen these letters on mountain sides across the Western United States. Did you know there are more than 600 of them, including a few in the East
+				and around the world? Montana, Utah, and California each have at least 80. It all started at UC Berkeley in 1905 (or maybe in Lahaina Hawai'i in 1904?).</p>
+				<p>I've been collecting these for several years (no, I haven't been to most of them), including building a <a href="https://en.wikipedia.org/wiki/Hillside_letters" target="_blank">set of pages
+				on the subject</a> at Wikipedia. Thanks to several people who have added to that page, and if I'm missing one, let me know.</p>
+		<p>If you wish, you are welcome to <a href="https://byu.maps.arcgis.com/home/item.html?id=f0b23cab97ad4620871ea40df1c4394f">download the GIS data</a>
+		from ArcGIS Online. All I ask is that you give me credit if you use it.</p>
+ 
+		<p>Which one is part of your identity? Here's mine:</p>
+		<img src="ymountain.jpg" width="300px"/>
+		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>close</div>
+		</div> -->
     
     <style>
       .custom-popup .leaflet-popup-content-wrapper {
@@ -417,7 +440,19 @@ map.on("layerremove", function(event) {
   margin: 10px 10px 10px 10px; /* increase padding */
 }
         
-    
+   /*  .leaflet-control-layers {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d8bfd8;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Lucida Sans", sans-serif;
+  font-size: 14px;
+  
+} */
+	    
 #slider-container {
   width: 220px;
   height: 30px;
