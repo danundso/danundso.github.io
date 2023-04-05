@@ -335,9 +335,9 @@ var germanyLayer = L.geoJSON(teams, {
 	  
 	  
 var championsLayer = L.geoJSON(teams, {
-//  filter: function(feature) {
-//    return feature.properties.Attribute === 2;
-//  },
+  filter: function(feature) {
+    return feature.properties.Attribute === 2;
+  },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
       icon: L.icon({
@@ -354,6 +354,15 @@ var championsLayer = L.geoJSON(teams, {
     return marker;
   }
 });
+	  
+	  year3 = timeslider.slider("value")
+	  if (map.hasLayer(championsLayer)){
+		  if (layer.feature.properties[year] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }};	  
+		  
 	  
 	  
       
