@@ -361,7 +361,7 @@ var championsLayer = L.geoJSON(teams, {
 }
 	  
 	  
-	  year3 = "S" + timeslider.slider("value")
+	  var year3 = "S" + timeslider.slider("value")
 	  
 	  if (map.hasLayer(championsLayer)) {
         germanyLayer.eachLayer(function(layer) {
