@@ -362,17 +362,23 @@ var championsLayer = L.geoJSON(teams, {
 }
 	  
 	  
-	  year3 = "S" + timeslider.slider("value")
-	  
-	  if (map.hasLayer(championsLayer)) {
-        germanyLayer.eachLayer(function(layer) {
-      if (layer.feature.properties[year3] === 2) {
+	  map.on('overlayadd', function(e) {
+  // Check if the 'Champions League' layer was added
+  if (e.layer.options.id === 'myChampionsLayerId') {
+    // Get the value of the slider
+    var year = document.getElementById('mySliderId').value;
+    
+    // Loop through all layers in the 'Germany' layer group
+    germanyLayer.eachLayer(function(layer) {
+      // Check if the team's attribute for the selected year is 2
+      if (layer.feature.properties[year] === 2) {
         layer.addTo(map);
       } else {
         map.removeLayer(layer);
       }
     });
-	  }
+  }
+});
 		  
 	  
 	  
