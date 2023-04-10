@@ -48,6 +48,15 @@
     <option value="satellite">Satellite Imagery</option>
   </select>
 </div>
+	
+	<div id="map-container">
+  <div id="map"></div>
+  <label>
+    <input type="checkbox" id="champions-league-checkbox">
+    Champions League
+  </label>
+</div>
+
 		
   <script>
 	
@@ -511,6 +520,18 @@ layerControl.getContainer().style.zIndex = 9999;
 			z-index: 500;
 			padding: 10px;
 		}
+	    
+	    #map-container {
+  position: relative;
+}
+
+#champions-league-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+	z-index: 9900;
+}
+
     </style>
     
   </body>
