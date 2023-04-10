@@ -29,25 +29,29 @@
        z-index: 20; padding: 5px; border-radius: 5px;
        background-color: #ffffff; opacity: 0.7;
        }
+       
+      
 	     
       </style>
     
 </head>
 <body>
   <div id = "map"></div>
+  
+  <div id="controls"></div>
 	
   <div id="slider"></div>
 	
 	<div id="basemap-selector-container">
   <select id="basemap-selector">
-    <option value="osm">OpenStreetMap</option>
+    <option value="osm">Basemap</option>
     <option value="satellite">Satellite Imagery</option>
   </select>
 </div>
-	
+		
   <script>
 	
-	  $("#slider").slider({
+var timeslider =  $("#slider").slider({
   min: 2015,
   max: 2022,
   step: 1,
@@ -72,6 +76,7 @@
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
+    if (map.hasLayer(englandLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -85,8 +90,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
+   
 	  spainLayer.eachLayer(function(layer) {
+ if (map.hasLayer(spainLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -100,9 +107,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  germanyLayer.eachLayer(function(layer) {
+   if (map.hasLayer(germanyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -116,9 +124,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  franceLayer.eachLayer(function(layer) {
+   if (map.hasLayer(franceLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -132,9 +141,10 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
+  }});
 	  
 	  italyLayer.eachLayer(function(layer) {
+ if (map.hasLayer(italyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
@@ -148,8 +158,8 @@
         layer.getElement().style.visibility = "hidden";
       }
     }
-  });
-	  
+  }});
+	
 	  
   }
 });
@@ -160,11 +170,12 @@
     
    var map = L.map('map').setView([45, 3], 5);
     
-var openStreetMapLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var openStreetMapLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
     minZoom: 3,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'
 }).addTo(map);
+
 
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 19,
@@ -339,18 +350,37 @@ var championsLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
-
     return marker;
   }
 });
+	  function filterTeamsByYear(year) {
+  championsLayer.clearLayers(); // Remove all markers from the champions layer
+  championsLayer.addData(teams.filter(function(feature) {
+    return feature.properties.Attribute === 2 && feature.properties.Year === year;
+  }));
+}
+	  
+	  
+	  var year3 = "S" + timeslider.slider("value")
+	  
+	  if (map.hasLayer(championsLayer)) {
+        germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
+      } else {
+        map.removeLayer(layer);
+      }
+    });
+	  }
+		  
 	  
 	  
       
-  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
+//  var group = L.layerGroup([spainLayer, italyLayer, englandLayer, franceLayer, germanyLayer, championsLayer]);
       
-      var baseLayers = {
- "All Teams": group
- };
+ //     var baseLayers = {
+// "All Teams": group
+// };
 
 var overlayLayers = {
  "Champions League": championsLayer,
@@ -361,69 +391,23 @@ var overlayLayers = {
  "Germany": germanyLayer
  };
 
- L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
-	  
-	  
-	  
-	  
+// var layerControl = L.control.layers(baseLayers, overlayLayers, {collapsed: false});
+ var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
 
-	  
-	  
-	  
-	  
-	  
-	  
+layerControl.addTo(map);
 
-	  
- 
-	  
-
-	  
-     
-	
-      
-
-      
-      
-// L.geoJSON(teams, {
-//    pointToLayer: function (feature, latlng) {
-//        var iconUrl = 'englandlogos/manu.png';
-//        var markerOptions = {
-//            icon: L.icon({
-//                iconUrl: iconUrl,
-//                iconSize: [20], // set the size of the icon
-//                iconAnchor: [10, 10], // set the anchor point of the icon
-//            })
-//        };
-//        var marker = L.marker(latlng, markerOptions);
-//        marker.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                         "Country: " + feature.properties.Country);
-//        return marker;
-//    }
-// }).addTo(map);
-     
-//          function onEachFeature(feature, layer) {
-//    if (feature.properties && feature.properties.Team && feature.properties.Country) {
-//            layer.bindPopup("Team: " + feature.properties.Team + "<br>" + 
-//                            "Country: " + feature.properties.Country);
-//       }}
+layerControl.getContainer().style.zIndex = 9999;
     
     
-      
- //     L.geoJSON(teams, {
- //   onEachFeature: onEachFeature
-  // }).addTo(map);
-        
+	  
+	  
+	  
+	  
+
 
       
-  //    var Logo = L.icon({
-  //  iconUrl: 'englandlogos/manu.png',
-           
-  //  iconSize: [25], // size of the icon
-
-    //  });
       
-    //  L.marker([51.5, -0.09], {icon: Logo}).addTo(map);
+
       
   </script>
 	
@@ -490,7 +474,7 @@ var overlayLayers = {
   height: 10px;
   position: fixed;
   right: 10px;
-  top: 300px;
+  top: 260px;
   transform: translateY(-50%);
 }
 	   
@@ -515,6 +499,18 @@ var overlayLayers = {
   width: 150px;
   font-size: 14px;
 }
+	    
+	    #controls {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			height: 300px;
+			width: 240px;
+			background-color: #FCF6F5;
+			opacity: 0.85;
+			z-index: 500;
+			padding: 10px;
+		}
     </style>
     
   </body>
