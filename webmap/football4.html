@@ -416,14 +416,17 @@ checkbox.addEventListener("change", function() {
     germanyLayer.eachLayer(function(layer) {
       if (layer.feature.properties.year3 === 2) {
         layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
       }
     });
   } else {
     germanyLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "hidden";
+      layer.getElement().style.visibility = "visible";
     });
   }
 });
+
 
 
 	  
