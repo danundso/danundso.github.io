@@ -57,6 +57,12 @@
   </label>
 </div>
 
+	
+	<div class="checkbox">
+  <input type="checkbox" id="champions-league" name="champions-league">
+  <label for="champions-league">Champions League</label>
+</div>
+
 		
   <script>
 	
@@ -532,6 +538,35 @@ layerControl.getContainer().style.zIndex = 9999;
 	z-index: 9900;
 }
 
+	    .checkbox {
+  float: right;
+  margin: 10px;
+}
+
+.checkbox label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox input[type="checkbox"] + label:before {
+  content: "\2714";
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+}
+
+.checkbox input[type="checkbox"]:checked + label:before {
+  background-color: #0099ff;
+  color: #fff;
+}
+
+	    
     </style>
     
   </body>
