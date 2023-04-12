@@ -113,10 +113,11 @@ var timeslider =  $("#slider").slider({
    if (map.hasLayer(germanyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
-        layer.getElement().style.visibility = "visible";
-      } else {
-        layer.getElement().style.visibility = "hidden";
-      }
+	  layer.getElement().style.visibility = "visible";
+	} else if (layer.getElement().style.visibility !== "hidden") {
+	  layer.getElement().style.visibility = "hidden";
+	}
+
     } else {
       if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
@@ -354,26 +355,51 @@ var championsLayer = L.geoJSON(teams, {
   },
 	 id: 'myChampionsLayerId'
 });
-
-	  map.on('overlayadd', function(e) {
-  if (e.layer.options.id === 'myChampionsLayerId') {
-    map.addLayer(championsLayer);
-  }
-});
-
-// Add event listener for the layer control
-map.on('overlayremove', function(e) {
-  if (e.layer.options.id === 'myChampionsLayerId') {
-    map.removeLayer(championsLayer);
-  }
-});
-	  
-	  
-	  if (map.hasLayer(championsLayer)) {
-  alert("Poo poo")
-} else {
-  alert("pee pee")
+	  function filterTeamsByYear(year) {
+  championsLayer.clearLayers(); // Remove all markers from the champions layer
+  championsLayer.addData(teams.filter(function(feature) {
+    return feature.properties.Attribute === 2 && feature.properties.Year === year;
+  }));
 }
+	  
+	  
+	  
+	  
+	  map.on('overlayadd', function(e) {
+  // Check if the 'Champions League' layer was added
+  if (e.layer.options.id === 'myChampionsLayerId') {
+    // Get the value of the slider
+    var year3 = "S" + timeslider.slider("value");
+    
+    // Loop through all layers in the 'Germany' layer group
+    germanyLayer.eachLayer(function(layer) {
+      // Check if the team's attribute for the selected year is 2
+      if (layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
+      } else {
+        map.removeLayer(layer);
+      }
+    });
+  }
+});
+	  
+	  map.on('overlayremove', function(e) {
+  // Check if the 'Champions League' layer was removed
+  if (e.layer.options.id === 'myChampionsLayerId') {
+    // Get the value of the slider
+    var year3 = "S" + timeslider.slider("value");
+    
+    
+    germanyLayer.eachLayer(function(layer) {
+      
+      if (layer.feature.properties[year3] === 1 || layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
+      } else {
+        map.removeLayer(layer);
+      }
+    });
+  }
+});
 
 		  
 	  
