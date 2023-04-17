@@ -407,11 +407,12 @@ layerControl.addTo(map);
 layerControl.getContainer().style.zIndex = 9999;
     
     
-	  var year3 = "S" + timeslider.slider("value")
+	 
 	  
 	 var checkbox = document.getElementById("champions-league");
 
 checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
   if (checkbox.checked) {
     germanyLayer.eachLayer(function(layer) {
       if (layer.feature.properties.year3 === 2) {
