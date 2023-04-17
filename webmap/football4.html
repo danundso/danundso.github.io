@@ -415,7 +415,7 @@ checkbox.addEventListener("change", function() {
   var year3 = "S" + timeslider.slider("value")
   if (checkbox.checked) {
     germanyLayer.eachLayer(function(layer) {
-      if (layer.feature.properties.year3 === 2) {
+      if (layer.feature.properties[year3] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
         layer.getElement().style.visibility = "hidden";
