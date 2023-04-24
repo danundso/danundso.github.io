@@ -274,6 +274,22 @@ var italyLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
   }
@@ -295,6 +311,22 @@ var englandLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                          {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
   }
@@ -316,6 +348,22 @@ var franceLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                          {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
       }
@@ -338,6 +386,22 @@ var germanyLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                         {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
   }
