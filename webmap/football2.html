@@ -372,7 +372,7 @@ var franceLayer = L.geoJSON(teams, {
 
 var germanyLayer = L.geoJSON(teams, {
   filter: function(feature) {
-    return feature.properties.Country === "France";
+    return feature.properties.Country === "Germany";
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
