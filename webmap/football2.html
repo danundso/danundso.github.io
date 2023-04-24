@@ -121,7 +121,7 @@ var timeslider =  $("#slider").slider({
 	  
 	  germanyLayer.eachLayer(function(layer) {
    if (map.hasLayer(germanyLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
