@@ -478,7 +478,7 @@ layerControl.getContainer().style.zIndex = 9999;
 	 
 
 checkbox.addEventListener("change", function() {
-  var year3 = "S" + timeslider.slider("value")
+  var year3 = "S" + timeslider.slider("value");
   if (checkbox.checked) {
     germanyLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
@@ -489,7 +489,9 @@ checkbox.addEventListener("change", function() {
     });
   } else {
     germanyLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "visible";
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
     });
   }
 });
