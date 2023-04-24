@@ -371,9 +371,7 @@ var franceLayer = L.geoJSON(teams, {
 
 var germanyLayer = L.geoJSON(teams, {
   filter: function(feature) {
-    var year3 = "S" + timeslider.slider("value");
-    return feature.properties.Country === "Germany" &&
-           (feature.properties[year3] === 1 || feature.properties[year3] === 2);
+    return feature.properties.Country === "Germany";
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
@@ -386,9 +384,9 @@ var germanyLayer = L.geoJSON(teams, {
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
-                        {className: 'custom-popup'});
-
-    map.on('zoomend', function() {
+                         {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
       if (map.getZoom() >= 11) {
         marker.setIcon(L.icon({
           iconUrl: feature.properties.icon || "ball.png",
@@ -405,44 +403,8 @@ var germanyLayer = L.geoJSON(teams, {
     });
 
     return marker;
-  }
-});
-
-var overlayLayers = {
-  "Germany": germanyLayer
-};
-
-var layerControl = L.control.layers(null, overlayLayers, {collapsed: false});
-layerControl.addTo(map);
-
-// Listen for changes to the slider value and update the layer accordingly
-timeslider.on("change", function(e) {
-  var year3 = "S" + e.target.value;
-  germanyLayer.clearLayers();
-  germanyLayer.addData(teams.filter(function(feature) {
-    return feature.properties.Country === "Germany" &&
-           (feature.properties[year3] === 1 || feature.properties[year3] === 2);
-  }));
-});
-
-// Listen for changes to the layer control and update the layer accordingly
-map.on('overlayremove', function(eventLayer) {
-  if (eventLayer.name === "Germany") {
-    map.removeLayer(germanyLayer);
-  }
-});
-
-map.on('overlayadd', function(eventLayer) {
-  if (eventLayer.name === "Germany") {
-    var year3 = "S" + timeslider.slider("value");
-    germanyLayer.clearLayers();
-    germanyLayer.addData(teams.filter(function(feature) {
-      return feature.properties.Country === "Germany" &&
-             (feature.properties[year3] === 1 || feature.properties[year3] === 2);
-    }));
-    map.addLayer(germanyLayer);
-  }
-});
+      }
+    }).addTo(map);
 
 
 	  
