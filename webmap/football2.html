@@ -87,7 +87,7 @@ var timeslider =  $("#slider").slider({
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
     if (map.hasLayer(englandLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -104,7 +104,7 @@ var timeslider =  $("#slider").slider({
    
 	  spainLayer.eachLayer(function(layer) {
  if (map.hasLayer(spainLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -138,7 +138,7 @@ var timeslider =  $("#slider").slider({
 	  
 	  franceLayer.eachLayer(function(layer) {
    if (map.hasLayer(franceLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -155,7 +155,7 @@ var timeslider =  $("#slider").slider({
 	  
 	  italyLayer.eachLayer(function(layer) {
  if (map.hasLayer(italyLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -441,7 +441,7 @@ checkbox.addEventListener("change", function() {
       }
     });
   } else {
-    england.eachLayer(function(layer) {
+    englandLayer.eachLayer(function(layer) {
       layer.getElement().style.visibility = "visible";
     });
   }
