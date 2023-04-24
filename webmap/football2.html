@@ -497,7 +497,7 @@ checkbox.addEventListener("change", function() {
 });
 	  
 	  checkbox.addEventListener("change", function() {
-  var year3 = "S" + timeslider.slider("value")
+  var year3 = "S" + timeslider.slider("value");
   if (checkbox.checked) {
     englandLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
@@ -508,14 +508,16 @@ checkbox.addEventListener("change", function() {
     });
   } else {
     englandLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "visible";
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
     });
   }
 });
 	  
 	  
 	  checkbox.addEventListener("change", function() {
-  var year3 = "S" + timeslider.slider("value")
+  var year3 = "S" + timeslider.slider("value");
   if (checkbox.checked) {
     spainLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
@@ -526,14 +528,16 @@ checkbox.addEventListener("change", function() {
     });
   } else {
     spainLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "visible";
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
     });
   }
 });
 	  
 	  
 	  checkbox.addEventListener("change", function() {
-  var year3 = "S" + timeslider.slider("value")
+  var year3 = "S" + timeslider.slider("value");
   if (checkbox.checked) {
     italyLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
@@ -544,14 +548,16 @@ checkbox.addEventListener("change", function() {
     });
   } else {
     italyLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "visible";
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
     });
   }
 });
 	  
 	  
 	  checkbox.addEventListener("change", function() {
-  var year3 = "S" + timeslider.slider("value")
+  var year3 = "S" + timeslider.slider("value");
   if (checkbox.checked) {
     franceLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
@@ -561,8 +567,10 @@ checkbox.addEventListener("change", function() {
       }
     });
   } else {
-    franceLayer.eachLayer(function(layer) {
-      layer.getElement().style.visibility = "visible";
+    frranceLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
     });
   }
 });
