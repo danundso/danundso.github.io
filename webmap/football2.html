@@ -48,6 +48,14 @@
     <option value="satellite">Satellite Imagery</option>
   </select>
 </div>
+	
+
+	
+	<div class="checkbox">
+  <input type="checkbox" id="champions-league" name="champions-league">
+  <label for="champions-league">Champions League</label>
+</div>
+
 		
   <script>
 	
@@ -113,11 +121,10 @@ var timeslider =  $("#slider").slider({
    if (map.hasLayer(germanyLayer)) {
     if (championsLeagueSelected) {
       if (layer.feature.properties[year] === 2) {
-	  layer.getElement().style.visibility = "visible";
-	} else if (layer.getElement().style.visibility !== "hidden") {
-	  layer.getElement().style.visibility = "hidden";
-	}
-
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
     } else {
       if (layer.feature.properties[year]) {
         layer.getElement().style.visibility = "visible";
@@ -352,8 +359,7 @@ var championsLayer = L.geoJSON(teams, {
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
     return marker;
-  },
-	 id: 'myChampionsLayerId'
+  }
 });
 	  function filterTeamsByYear(year) {
   championsLayer.clearLayers(); // Remove all markers from the champions layer
@@ -363,44 +369,17 @@ var championsLayer = L.geoJSON(teams, {
 }
 	  
 	  
+	  var year3 = "S" + timeslider.slider("value")
 	  
-	  
-	  map.on('overlayadd', function(e) {
-  // Check if the 'Champions League' layer was added
-  if (e.layer.options.id === 'myChampionsLayerId') {
-    // Get the value of the slider
-    var year3 = "S" + timeslider.slider("value");
-    
-    // Loop through all layers in the 'Germany' layer group
-    germanyLayer.eachLayer(function(layer) {
-      // Check if the team's attribute for the selected year is 2
+	  if (map.hasLayer(championsLayer)) {
+        germanyLayer.eachLayer(function(layer) {
       if (layer.feature.properties[year3] === 2) {
         layer.addTo(map);
       } else {
         map.removeLayer(layer);
       }
     });
-  }
-});
-	  
-	  map.on('overlayremove', function(e) {
-  // Check if the 'Champions League' layer was removed
-  if (e.layer.options.id === 'myChampionsLayerId') {
-    // Get the value of the slider
-    var year3 = "S" + timeslider.slider("value");
-    
-    
-    germanyLayer.eachLayer(function(layer) {
-      
-      if (layer.feature.properties[year3] === 1 || layer.feature.properties[year3] === 2) {
-        layer.addTo(map);
-      } else {
-        map.removeLayer(layer);
-      }
-    });
-  }
-});
-
+	  }
 		  
 	  
 	  
@@ -412,7 +391,7 @@ var championsLayer = L.geoJSON(teams, {
 // };
 
 var overlayLayers = {
- "Champions League": championsLayer,
+// "Champions League": championsLayer,
  "Spain": spainLayer,
  "Italy": italyLayer,
  "England": englandLayer,
@@ -428,33 +407,103 @@ layerControl.addTo(map);
 layerControl.getContainer().style.zIndex = 9999;
     
     
+	 
 	  
-	  
-	  
-	  
+	 var checkbox = document.getElementById("champions-league");
 
+checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
+  if (checkbox.checked) {
+    germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    germanyLayer.eachLayer(function(layer) {
+      layer.getElement().style.visibility = "visible";
+    });
+  }
+});
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
+  if (checkbox.checked) {
+    englandLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    england.eachLayer(function(layer) {
+      layer.getElement().style.visibility = "visible";
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
+  if (checkbox.checked) {
+    spainLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    spainLayer.eachLayer(function(layer) {
+      layer.getElement().style.visibility = "visible";
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
+  if (checkbox.checked) {
+    italyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    italyLayer.eachLayer(function(layer) {
+      layer.getElement().style.visibility = "visible";
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value")
+  if (checkbox.checked) {
+    franceLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    franceLayer.eachLayer(function(layer) {
+      layer.getElement().style.visibility = "visible";
+    });
+  }
+});
 
-      
-      
 
       
   </script>
 	
-<!--	<div id="about" style="font-size: 0.9em; position: absolute; right: 25px; top: 25px; width: 500px; padding: 5px; background-color: #dfdfdf; box-shadow: 5px 5px #0000004f; z-index:9990; max-width: 90%; max-height: 90%; overflow-y: auto;">
-		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>X</div>
-			<h2>Battle of</h2>
-		<p style="font-size: 0.7em; font-style: italic; margin-block:0em; z-index: 9990;" target='_blank'>A <a href="https://carto.byu.edu/my-geo-collections">geo-collection</a> by <a href="http://carto.byu.edu/" target='_blank'>Brandon Plewe</a><br/>
-				<p>Many of us have seen these letters on mountain sides across the Western United States. Did you know there are more than 600 of them, including a few in the East
-				and around the world? Montana, Utah, and California each have at least 80. It all started at UC Berkeley in 1905 (or maybe in Lahaina Hawai'i in 1904?).</p>
-				<p>I've been collecting these for several years (no, I haven't been to most of them), including building a <a href="https://en.wikipedia.org/wiki/Hillside_letters" target="_blank">set of pages
-				on the subject</a> at Wikipedia. Thanks to several people who have added to that page, and if I'm missing one, let me know.</p>
-		<p>If you wish, you are welcome to <a href="https://byu.maps.arcgis.com/home/item.html?id=f0b23cab97ad4620871ea40df1c4394f">download the GIS data</a>
-		from ArcGIS Online. All I ask is that you give me credit if you use it.</p>
- 
-		<p>Which one is part of your identity? Here's mine:</p>
-		<img src="ymountain.jpg" width="300px"/>
-		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>close</div>
-		</div> -->
+
     
     <style>
       .custom-popup .leaflet-popup-content-wrapper {
@@ -540,6 +589,28 @@ layerControl.getContainer().style.zIndex = 9999;
 			z-index: 500;
 			padding: 10px;
 		}
+	    
+	    #map-container {
+  position: relative;
+}
+
+#champions-league-checkbox {
+  position: absolute;
+  top: 150px;
+  right: 10px;
+	z-index: 9900;
+}
+
+.checkbox {
+  position: fixed;
+  top: 150px;
+  right: 10px;
+  z-index: 9992;
+}
+
+
+
+	    
     </style>
     
   </body>
