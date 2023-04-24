@@ -86,13 +86,13 @@ var timeslider =  $("#slider").slider({
   step: 1,
   value: 2015,
   create: function() {
-    for (var i = 0; i <= 8; i++) {
+    for (var i = 0; i <= 7; i++) {
       var year = 15 + i + "/" + (16 + i);
       $("<span>").addClass("ui-slider-tick").css({
         "left": i * 0 + "%", 
-        "font-size": "7px",
-        "padding-left": "1px",
-        "padding-right": "1px"
+        "font-size": "7.5px",
+        "padding-left": "1.5px",
+        "padding-right": "1.5px"
       }).text(year).appendTo($("#slider"));
     }
   },
