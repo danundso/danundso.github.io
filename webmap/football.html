@@ -22,20 +22,40 @@
 
      
      <style>
-      #map {position: absolute; top: 0; bottom: 0 ; left: 0; right: 0;}
+      #map {position: absolute; top: 18px; bottom: 0 ; left: 0; right: 0;}
 	     
 	     .infobox { position: absolute;
        left:15px; width: 500px; top: 15px;
        z-index: 20; padding: 5px; border-radius: 5px;
        background-color: #ffffff; opacity: 0.7;
        }
-       
-      
-	     
+	     #topbar {
+            color: #2f2d36;
+            font-family:Lucida, sans-serif;
+            font-size: 6px;
+            position: fixed;
+            line-height: 7.5px;
+            background-color: #FCF6F5;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+	 right: 0;
+            width: 100%;
+            height: 0.9%;
+            min-height: 20px;
+            box-shadow: 0 1px 5px black;
+            padding-left: 0.5%;
+	    }
+         
       </style>
     
 </head>
 <body>
+	
+	<div id="topbar">
+        <h1 style="vertical-align:middle;"> Top 5 European Football Leagues </h1>  
+    </div>
+	
   <div id = "map"></div>
   
   <div id="controls"></div>
@@ -49,63 +69,30 @@
   </select>
 </div>
 	
-	<div id="info-box">
-  <h3>Promotions and Relegations</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Country</th>
-        <th>Promoted Teams</th>
-        <th>Relegated Teams</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Spain</td>
-        <td id="spain-promoted"></td>
-        <td id="spain-relegated"></td>
-      </tr>
-      <tr>
-        <td>Italy</td>
-        <td id="italy-promoted"></td>
-        <td id="italy-relegated"></td>
-      </tr>
-      <tr>
-        <td>England</td>
-        <td id="england-promoted"></td>
-        <td id="england-relegated"></td>
-      </tr>
-      <tr>
-        <td>France</td>
-        <td id="france-promoted"></td>
-        <td id="france-relegated"></td>
-      </tr>
-      <tr>
-        <td>Germany</td>
-        <td id="germany-promoted"></td>
-        <td id="germany-relegated"></td>
-      </tr>
-    </tbody>
-  </table>
+	
+	<div class="checkbox">
+  <input type="checkbox" id="champions-league" name="champions-league">
+  <label for="champions-league">Champions League</label>
 </div>
 
 		
   <script>
+	  
+	  var checkbox = document.getElementById("champions-league");
 	
-	  $("#slider").slider({
+var timeslider =  $("#slider").slider({
   min: 2015,
   max: 2022,
   step: 1,
-  value: 1,
+  value: 2015,
   create: function() {
-    // Create ticks with labels for each year
-    for (var i = 2015; i <= 2022; i++) {
-      var year = "S" + String(i - 2000);
+    for (var i = 0; i <= 7; i++) {
+      var year = 15 + i + "/" + (16 + i);
       $("<span>").addClass("ui-slider-tick").css({
-        "left": (i - 2015) / 7 * 100 + "%",
-        "font-size": "10px",
-        "padding-left": "3px",
-        "padding-right": "3px"
+        "left": i * 0 + "%", 
+        "font-size": "7.5px",
+        "padding-left": "1.5px",
+        "padding-right": "1.5px"
       }).text(year).appendTo($("#slider"));
     }
   },
@@ -114,14 +101,11 @@
     var year = "S" + ui.value;
 	  
     var championsLeagueSelected = map.hasLayer(championsLayer);
-	  
-   var promotedTeams = [];
-   var relegatedTeams = [];
 
     // Loop through the GeoJSON features
    englandLayer.eachLayer(function(layer) {
     if (map.hasLayer(englandLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -138,7 +122,7 @@
    
 	  spainLayer.eachLayer(function(layer) {
  if (map.hasLayer(spainLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -155,7 +139,7 @@
 	  
 	  germanyLayer.eachLayer(function(layer) {
    if (map.hasLayer(germanyLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -172,7 +156,7 @@
 	  
 	  franceLayer.eachLayer(function(layer) {
    if (map.hasLayer(franceLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -189,7 +173,7 @@
 	  
 	  italyLayer.eachLayer(function(layer) {
  if (map.hasLayer(italyLayer)) {
-    if (championsLeagueSelected) {
+    if (checkbox.checked) {
       if (layer.feature.properties[year] === 2) {
         layer.getElement().style.visibility = "visible";
       } else {
@@ -203,8 +187,7 @@
       }
     }
   }});
-	
-	  
+  
   }
 });
 
@@ -308,6 +291,22 @@ var italyLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
   }
@@ -329,6 +328,22 @@ var englandLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                          {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
   }
@@ -350,6 +365,22 @@ var franceLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                          {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
       }
@@ -371,11 +402,29 @@ var germanyLayer = L.geoJSON(teams, {
 
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
-                        {className: 'custom-popup'});
+                         {className: 'custom-popup'});
+	  
+	   map.on('zoomend', function() {
+      if (map.getZoom() >= 11) {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [55],
+          iconAnchor: [27, 27]
+        }));
+      } else {
+        marker.setIcon(L.icon({
+          iconUrl: feature.properties.icon || "ball.png",
+          iconSize: [25],
+          iconAnchor: [12, 12]
+        }));
+      }
+    });
 
     return marker;
-  }
-}).addTo(map);
+      }
+    }).addTo(map);
+
+
 	  
 	  
 var championsLayer = L.geoJSON(teams, {
@@ -394,10 +443,29 @@ var championsLayer = L.geoJSON(teams, {
     marker.bindPopup("Team: " + feature.properties.Team + "<br>" +
                       "Country: " + feature.properties.Country,
                           {className: 'custom-popup'});
-
     return marker;
   }
 });
+	  function filterTeamsByYear(year) {
+  championsLayer.clearLayers(); // Remove all markers from the champions layer
+  championsLayer.addData(teams.filter(function(feature) {
+    return feature.properties.Attribute === 2 && feature.properties.Year === year;
+  }));
+}
+	  
+	  
+	  var year3 = "S" + timeslider.slider("value")
+	  
+	  if (map.hasLayer(championsLayer)) {
+        germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.addTo(map);
+      } else {
+        map.removeLayer(layer);
+      }
+    });
+	  }
+		  
 	  
 	  
       
@@ -408,7 +476,7 @@ var championsLayer = L.geoJSON(teams, {
 // };
 
 var overlayLayers = {
- "Champions League": championsLayer,
+// "Champions League": championsLayer,
  "Spain": spainLayer,
  "Italy": italyLayer,
  "England": englandLayer,
@@ -424,33 +492,113 @@ layerControl.addTo(map);
 layerControl.getContainer().style.zIndex = 9999;
     
     
+	 
 	  
-	  
-	  
-	  
+	 
 
+checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value");
+  if (checkbox.checked) {
+    germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
+    });
+  }
+});
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value");
+  if (checkbox.checked) {
+    englandLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    englandLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value");
+  if (checkbox.checked) {
+    spainLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    spainLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value");
+  if (checkbox.checked) {
+    italyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    italyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
+    });
+  }
+});
+	  
+	  
+	  checkbox.addEventListener("change", function() {
+  var year3 = "S" + timeslider.slider("value");
+  if (checkbox.checked) {
+    franceLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3] === 2) {
+        layer.getElement().style.visibility = "visible";
+      } else {
+        layer.getElement().style.visibility = "hidden";
+      }
+    });
+  } else {
+    franceLayer.eachLayer(function(layer) {
+      if (layer.feature.properties[year3]) {
+        layer.getElement().style.visibility = "visible";
+      }
+    });
+  }
+});
 
-      
-      
 
       
   </script>
 	
-<!--	<div id="about" style="font-size: 0.9em; position: absolute; right: 25px; top: 25px; width: 500px; padding: 5px; background-color: #dfdfdf; box-shadow: 5px 5px #0000004f; z-index:9990; max-width: 90%; max-height: 90%; overflow-y: auto;">
-		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>X</div>
-			<h2>Battle of</h2>
-		<p style="font-size: 0.7em; font-style: italic; margin-block:0em; z-index: 9990;" target='_blank'>A <a href="https://carto.byu.edu/my-geo-collections">geo-collection</a> by <a href="http://carto.byu.edu/" target='_blank'>Brandon Plewe</a><br/>
-				<p>Many of us have seen these letters on mountain sides across the Western United States. Did you know there are more than 600 of them, including a few in the East
-				and around the world? Montana, Utah, and California each have at least 80. It all started at UC Berkeley in 1905 (or maybe in Lahaina Hawai'i in 1904?).</p>
-				<p>I've been collecting these for several years (no, I haven't been to most of them), including building a <a href="https://en.wikipedia.org/wiki/Hillside_letters" target="_blank">set of pages
-				on the subject</a> at Wikipedia. Thanks to several people who have added to that page, and if I'm missing one, let me know.</p>
-		<p>If you wish, you are welcome to <a href="https://byu.maps.arcgis.com/home/item.html?id=f0b23cab97ad4620871ea40df1c4394f">download the GIS data</a>
-		from ArcGIS Online. All I ask is that you give me credit if you use it.</p>
- 
-		<p>Which one is part of your identity? Here's mine:</p>
-		<img src="ymountain.jpg" width="300px"/>
-		<div style="cursor: pointer; text-align:right; color: red; font-weight: bold;" onclick="closeabout()";>close</div>
-		</div> -->
+
     
     <style>
       .custom-popup .leaflet-popup-content-wrapper {
@@ -537,38 +685,27 @@ layerControl.getContainer().style.zIndex = 9999;
 			padding: 10px;
 		}
 	    
-	    #info-box {
-  position: fixed;
-  top: 400px;
+	    #map-container {
+  position: relative;
+}
+
+#champions-league-checkbox {
+  position: absolute;
+  top: 150px;
   right: 10px;
-  width: 300px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid black;
-  z-index: 9990;
+	z-index: 9900;
 }
 
-#info-box h3 {
-  margin-top: 0;
+.checkbox {
+  position: fixed;
+  top: 150px;
+  right: 10px;
+  z-index: 9992;
 }
 
-#info-box table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
-#info-box th,
-#info-box td {
-  padding: 5px;
-  border: 1px solid black;
-  text-align: center;
-}
 
-#info-box th {
-  background-color: #ddd;
-  font-weight: bold;
-}
-
+	    
     </style>
     
   </body>
