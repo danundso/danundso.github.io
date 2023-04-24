@@ -372,9 +372,7 @@ var franceLayer = L.geoJSON(teams, {
 
 var germanyLayer = L.geoJSON(teams, {
   filter: function(feature) {
-    var year3 = "S" + timeslider.slider("value");
-    return feature.properties.Country === "Germany" &&
-           (feature.properties[year3] === 1 || feature.properties[year3] === 2);
+    return feature.properties.Country === "France";
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
@@ -406,6 +404,15 @@ var germanyLayer = L.geoJSON(teams, {
     });
 
     return marker;
+  },
+	onRemove: function(map) {
+    var year3 = "S" + timeslider.slider("value");
+    germanyLayer.eachLayer(function(layer) {
+      if (layer.feature.properties.Country === "Germany" &&
+          (layer.feature.properties[year3] === 1 || layer.feature.properties[year3] === 2)) {
+        layer.addTo(map);
+      }
+    });
   }
 }).addTo(map);
 	  
