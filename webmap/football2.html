@@ -90,9 +90,10 @@ var timeslider =  $("#slider").slider({
       var year = 15 + i + "/" + (16 + i);
       $("<span>").addClass("ui-slider-tick").css({
         "left": i * 0 + "%", 
+	"font-size": "6px",
         "font-size": "10px",
-        "padding-left": "0.5px",
-        "padding-right": "0.5px"
+        "padding-left": "0px",
+        "padding-right": "1px"
       }).text(year).appendTo($("#slider"));
     }
   },
