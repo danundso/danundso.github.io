@@ -374,7 +374,7 @@ var germanyLayer = L.geoJSON(teams, {
   filter: function(feature) {
     var year3 = "S" + timeslider.slider("value");
     return feature.properties.Country === "Germany" &&
-           feature.properties[year3] !== undefined;
+           (feature.properties[year3] === 1 || feature.properties[year3] === 2);
   },
   pointToLayer: function(feature, latlng) {
     var marker = L.marker(latlng, {
