@@ -159,6 +159,10 @@ p {
 
 #scrollr-base{background: linear-gradient(-45deg, #35577D, #141E30);}
 
+a {
+    color: #9bb4c9; /* Change the color value to the desired color */
+  }
+
 /*
 a{
   text-decoration: none;
